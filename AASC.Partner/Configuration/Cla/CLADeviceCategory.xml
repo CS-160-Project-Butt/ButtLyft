@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Devices name="CLA Device Category">
+  <Device name="Arcade/Consumer Gaming Device">
+  </Device>
+  <Device name="ATM">
+  </Device>
+  <Device name="Casino Gaming Device">
+  </Device>
+  <Device name="CCTV/Surveillance/Security">
+  </Device>
+  <Device name="Digital Picture Frame">
+  </Device>
+  <Device name="Digital Signage">
+  </Device>
+  <Device name="Electronic Payment Terminal">
+  </Device>
+  <Device name="Feature Phone">
+  </Device>
+  <Device name="Hand Held Data Terminal/PDA">
+  </Device>
+  <Device name="Industrial Automation Device">
+  </Device>
+  <Device name="Kiosk">
+  </Device>
+  <Device name="Media Player">
+  </Device>
+  <Device name="Medical Device">
+  </Device>
+  <Device name="Navigation Device">
+  </Device>
+  <Device name="Network Projector">
+  </Device>
+  <Device name="Point of Sale Device">
+  </Device>
+  <Device name="Printing Device">
+  </Device>
+  <Device name="Security/Surveillance Device">
+  </Device>
+  <Device name="Server">
+  </Device>
+  <Device name="Set-Top Box">
+  </Device>
+  <Device name="Telephone Device">
+  </Device>
+  <Device name="Test and Measurement Device">
+  </Device>
+  <Device name="Thin Client Device">
+  </Device>
+  <Device name="Other Device">
+  </Device>
+</Devices>

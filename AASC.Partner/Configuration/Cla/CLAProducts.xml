@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Products name="Product Items">
+  <Type name="Standard">
+    <Product name="XP"></Product>
+    <Product name="2009"></Product>
+    <Product name="7"></Product>
+    <Product name="8"></Product>
+  </Type>
+  <Type name="Pro">
+    <Product name="2000"></Product>
+    <Product name="XP"></Product>
+    <Product name="7"></Product>
+    <Product name="8"></Product>
+    <Product name="Industry 8.1"></Product>
+  </Type>
+  <Type name="POSReady">
+    <Product name="2009"></Product>
+    <Product name="7"></Product>
+    <Product name="Industry 8"></Product>
+    <Product name="Industry 8.1"></Product>
+  </Type>
+  <Type name="CE Compact">
+    <Product name="CE5"></Product>
+    <Product name="CE6"></Product>
+    <Product name="CE7"></Product>
+    <Product name="Compact 2013"></Product>
+  </Type>
+</Products>
+

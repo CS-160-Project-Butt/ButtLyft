@@ -1,0 +1,174 @@
+﻿<script type="text/javascript">
+    if (typeof app === 'undefined') {
+    document.location.href="/";
+  }
+</script>
+<div class="container">
+    <div class="page-header text-center">
+        <h3>IoTG Roadmap Maintenance Page</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="demo-section">
+            <div class="k-content" style="width: 100%;">
+                <div id="grid"
+                     kendo-grid="grid"
+                     k-data-source="dataSource"
+                     k-sortable="{ mode: 'multiple' }"
+                     k-resizable="true"
+                     k-pageable='{ pageSizes: true, refresh: true, buttonCount: 5 }'
+                     k-filterable="true"
+                     k-editable='{ mode: "popup", template: popupEditorTemplate }'
+                     k-selectable="'row'"
+                     k-toolbar='[ { template: toolbarTemplate } ]'
+                     k-columns='[
+                        { field: "id", title: "Id", hidden: true },
+                        { field: "model", title: "Model" },
+                        { field: "status", title: "Status" },
+                        { field: "platform", title: "Platform" },
+                        { field: "trim", title: "Trim" },
+                        { field: "year", title: "Year" },
+                        { field: "codeName", title: "Code Name" },
+                        { field: "level", title: "Level" },
+                        { field: "category", title: "Category" },
+                        { field: "subcategory", title: "Subcategory" },
+                        { field: "datasheet", title: "Document" },
+                        { field: "marketSegment", title: "Market Segment" },
+                        { field: "availabilityESSample", title: "Avail. ES-Sample" },
+                        { field: "availabilityMP", title: "Avail. MP" },
+                        { field: "contact", title: "Contact" },
+                        { command: ["edit", "destroy", { text: "Download", click: download }], title: "" }
+                     ]'
+                     k-on-data-bound="onDataBound(kendoEvent)"
+                     k-on-change="onChange(kendoEvent)">
+                </div>
+                <style scoped>
+                    .toolbar {
+                        padding: 15px;
+                        float: right;
+                    }
+                </style>
+            </div>
+        </div>
+        <script type="text/x-kendo-template" id="toolbar-iotgroadmap">
+            <div>
+                <button kendo-button ng-click="new(this)"><span class="k-icon k-i-plus"></span>New</button>
+            </div>
+        </script>
+        <!--
+        <div ng-controller="ModalInstanceController" class="modal-body">
+            <script type="text/ng-template" id="myModalContent.html">
+                <div class="modal-header">
+                    <h3 class="modal-title">Warnning {{ item.name }}</h3>
+                </div>
+                <div class="modal-body">
+                    <b>Are you sure you want to delete this?</b>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+            </script>
+        </div>
+        -->
+        <script id="popup_editor" type="text/x-kendo-template">
+            <p class="k-edit-label">IoTG Roadmap Editor</p>
+            <div class="k-edit-form-container">
+                <div class="k-edit-label">
+                    <label for="model">Model Number</label>
+                </div>
+                <div class="k-edit-field">
+                    <input type="text" class="k-input k-textbox" name="model" data-bind="value:model" />
+                </div>
+                <div class="k-edit-label">
+                    <label for="status">Status</label>
+                </div>
+                <div class="k-edit-field">
+                    <input k-on-change="dataItem.dirty=true" kendo-dropdownlist k-data-source="roadmapStatus" data-bind="value: status" />
+                </div>
+                <div class="k-edit-label">
+                    <label for="platform">Platform</label>
+                </div>
+                <div class="k-edit-field">
+                    <input id="platform" k-on-change="dataItem.dirty=true" kendo-drop-down-list k-data-source="platforms"
+                           k-data-text-field="'platform'" k-data-value-field="'platform'" data-bind="value: platform" />
+                </div>
+                <div class="k-edit-label">
+                    <label for="trim">Trim</label>
+                </div>
+                <div class="k-edit-field">
+                    <input id="platformTrim" k-on-change="dataItem.dirty=true" kendo-drop-down-list k-data-source="platformTrims"
+                           k-data-text-field="'trim'" k-data-value-field="'trim'" data-bind="value: trim" k-cascade-from="'platform'" />
+                </div>
+                <div class="k-edit-label">
+                    <label for="year">Year</label>
+                </div>
+                <div class="k-edit-field">
+                    <input type="text" class="k-input" name="year" data-format="n0"
+                           data-type="number" data-bind="value:year" data-role="numerictextbox" />
+                </div>
+                <div class="k-edit-label">
+                    <label for="codeName">Code Name</label>
+                </div>
+                <div class="k-edit-field">
+                    <input id="platformTrimCodeName" k-on-change="dataItem.dirty=true" kendo-drop-down-list k-data-source="platformTrimCodeNames"
+                           k-data-text-field="'codeName'" k-data-value-field="'codeName'" data-bind="value: codeName" k-cascade-from="'platformTrim'" />
+                </div>
+                <div class="k-edit-label">
+                    <label for="level">Level</label>
+                </div>
+                <div class="k-edit-field">
+                    <input id="levelDropdownList" k-on-change="dataItem.dirty=true" kendo-drop-down-list k-data-source="levels"
+                           k-data-text-field="'level'" k-data-value-field="'level'" data-bind="value: level" />
+                </div>
+                <div class="k-edit-label">
+                    <label for="category">Category</label>
+                </div>
+                <div class="k-edit-field">
+                    <input id="categoryDropdownList" k-on-change="dataItem.dirty=true" kendo-drop-down-list k-data-source="levelCategories"
+                           k-data-text-field="'category'" k-data-value-field="'category'" data-bind="value:category"
+                           k-cascade-from="'levelDropdownList'" />
+                </div>
+                <div class="k-edit-label">
+                    <label for="subCategory">Subcategory</label>
+                </div>
+                <div class="k-edit-field">
+                    <input k-on-change="dataItem.dirty=true" kendo-drop-down-list k-data-source="levelCategorySubCategories"
+                           k-data-text-field="'subcategory'" k-data-value-field="'subcategory'" data-bind="value:subcategory"
+                           k-cascade-from="'categoryDropdownList'" />
+                </div>
+                <div class="k-edit-label">
+                    <label for="datasheet">Data Sheet</label>
+                </div>
+                <div class="k-edit-field">
+                    <input type="text" class="k-input k-textbox" name="datasheet" data-bind="value:datasheet" />
+                </div>
+                <div class="k-edit-label">
+                    <label for="marketSegment">Market Segment</label>
+                </div>
+                <div class="k-edit-field">
+                    <input k-on-change="dataItem.dirty=true" kendo-dropdownlist k-data-source="marketSegments" data-bind="value: marketSegment" />
+                </div>
+                <div class="k-edit-label">
+                    <label for="availabilityESSample">Avail. ES-Sample</label>
+                </div>
+                <div class="k-edit-field">
+                    <input type="text" class="k-input k-textbox" name="availabilityESSample" data-bind="value:availabilityESSample" />
+                </div>
+                <div class="k-edit-label">
+                    <label for="availabilityMP">Avail. MP</label>
+                </div>
+                <div class="k-edit-field">
+                    <input type="text" class="k-input k-textbox" name="availabilityMP" data-bind="value:availabilityMP" />
+                </div>
+                <div class="k-edit-label">
+                    <label for="contact">Contact</label>
+                </div>
+                <div class="k-edit-field">
+                    <input type="text" class="k-input k-textbox" name="contact" data-bind="value:contact" />
+                </div>
+            </div>
+        </script>
+    </div>
+</div>

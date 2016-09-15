@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MarketSegments>
+  <MarketSegment name=""></MarketSegment>
+  <MarketSegment name="Medical/Healthcare"></MarketSegment>
+  <MarketSegment name="Industrial Control"></MarketSegment>
+  <MarketSegment name="Oil &amp; Gas"></MarketSegment>
+  <MarketSegment name="Power &amp; Energy"></MarketSegment>
+  <MarketSegment name="Retail/Hospitality"></MarketSegment>
+  <MarketSegment name="Smart Manufacturing"></MarketSegment>
+  <MarketSegment name="Building Automation"></MarketSegment>
+  <MarketSegment name="Surveillance"></MarketSegment>
+  <MarketSegment name="Digital Signage"></MarketSegment>
+  <MarketSegment name="Transportation"></MarketSegment>
+  <MarketSegment name="Test &amp; Measurement"></MarketSegment>
+  <MarketSegment name="Gaming"></MarketSegment>
+  <MarketSegment name="Networks &amp; Telecom"></MarketSegment>
+</MarketSegments>

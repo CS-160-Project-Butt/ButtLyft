@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Platforms>
+  <Platform name="Xeon">
+    <Trims>
+      <Trim name="Server EP/EN">
+        <CodeNames>
+          <CodeName>Grantley (Wellsburg)</CodeName>
+          <CodeName>Hasswell EN (LGA)</CodeName>
+          <CodeName>Grantley Refresh (Wellsburg)</CodeName>
+          <CodeName>Broadwell (EP (LGA))</CodeName>
+        </CodeNames>
+      </Trim>
+      <Trim name="Workstation">
+        <CodeNames>
+          <CodeName>Sky Lake</CodeName>
+          <CodeName>Next Gen</CodeName>
+        </CodeNames>
+      </Trim>
+      <Trim name="Mid Range Server">
+        <CodeNames>
+          <CodeName>Broadwell-DE</CodeName>
+          <CodeName>Broadwell-DE (Xeon D &amp; Pentium D)</CodeName>
+          <CodeName>Next Gen</CodeName>
+        </CodeNames>
+      </Trim>
+      <Trim name="Entry Server">
+        <CodeNames>
+          <CodeName>Rangeley</CodeName>
+          <CodeName>Rangeley SoC Processors</CodeName>
+          <CodeName>Denverton-NS</CodeName>
+          <CodeName>Next Gen</CodeName>
+        </CodeNames>
+      </Trim>
+    </Trims>
+  </Platform>
+  <Platform name="Core">
+    <Trims>
+      <Trim name="Desktop">
+        <CodeNames>
+          <CodeName>Sky Lake</CodeName>
+          <CodeName>Sky Lake-S</CodeName>
+          <CodeName>Next Gen</CodeName>
+        </CodeNames>
+      </Trim>
+      <Trim name="Mobile (H Series)">
+        <CodeNames>
+          <CodeName>Broadwell-H Mobile (QM87)</CodeName>
+          <CodeName>Broadwell (BGA) / ECC</CodeName>
+          <CodeName>Skylake-H Mobile (QM170/HM170)</CodeName>
+          <CodeName>Skylake-H BGA</CodeName>
+        </CodeNames>
+      </Trim>
+      <Trim name="Mobile (U Series)">
+        <CodeNames>
+          <CodeName>Broadwell ULT (QM87 MCP)</CodeName>
+          <CodeName>Broadwell Mobile ULT</CodeName>
+          <CodeName>Skylake ULT (QM100) Compatible MCP</CodeName>
+          <CodeName>Skylake Mobile ULT (BGA)</CodeName>
+        </CodeNames>
+      </Trim>
+    </Trims>
+  </Platform>
+  <Platform name="Atom">
+    <Trims>
+      <Trim name="Atom/Celeron Mainstream">
+        <CodeNames>
+          <CodeName>Moon Island</CodeName>
+          <CodeName>Bay Trail</CodeName>
+          <CodeName>Braswell SoC</CodeName>
+          <CodeName>Broxton SoC</CodeName>
+          <CodeName>Apollo Lake SoC</CodeName>
+        </CodeNames>
+      </Trim>
+      <Trim name="Atom-SoFIA">
+        <CodeNames>
+          <CodeName>SoFIA SoC</CodeName>
+          <CodeName>SoFIA SoC 3G-R / LTE</CodeName>
+        </CodeNames>
+      </Trim>
+    </Trims>
+  </Platform>
+  <Platform name="Quark">
+    <Trims>
+      <Trim name="Quark X1000 Series">
+        <CodeNames>
+          <CodeName>Quark Soc</CodeName>
+          <CodeName>Intel® Quark™ SoC X1000 Series</CodeName>
+        </CodeNames>
+      </Trim>
+      <Trim name="Quark Dx000 Series">
+        <CodeNames>
+          <CodeName>Quark Soc</CodeName>
+          <CodeName>Intel® Quark™ Microntroller D1000 (Silverbutte)</CodeName>
+          <CodeName>Intel® Quark™ Microntroller D2000 (Mint Valley)</CodeName>
+        </CodeNames>
+      </Trim>
+      <Trim name="Quark SE Series">
+        <CodeNames>
+          <CodeName>Quark Soc</CodeName>
+          <CodeName>Intel® Quark™ SE Microntroller D1000 (Altas Peak)</CodeName>
+        </CodeNames>
+      </Trim>
+    </Trims>
+  </Platform>
+</Platforms>

@@ -1,0 +1,87 @@
+<xml>
+	<Platforms>
+		<Platform name="Xeon">
+			<Trims>
+				<Trim>Server EP/EN</Trim>
+				<Trim>Workstation</Trim>
+				<Trim>Mid Range Server</Trim>
+				<Trim>Entry Server</Trim>
+			</Trims>
+		</Platform>	
+		<Platform name="Core">
+			<Trims>
+				<Trim>Desktop</Trim>
+				<Trim>Mobile (H Series)</Trim>
+				<Trim>Mobile (U Series)</Trim>
+			</Trims>
+		</Platform>
+		<Platform name="Atom">
+			<Trims>
+				<Trim>Atom/Celeron Mainstream</Trim>
+				<Trim>Atom-SoFIA</Trim>
+			</Trims>
+		</Platform>
+		<Platform name="Quark">
+			<Trims>
+				<Trim>Quark X1000 Series</Trim>
+				<Trim>Quark Dx000 Series</Trim>
+				<Trim>Quark SE Series</Trim>
+			</Trims>
+		</Platform>
+	</Platforms>
+	<Levels>
+		<Level name="Board-Level">
+			<Categories>
+				<Category name="COMs">
+					<Subcategory>COMe Mini</Subcategory>
+					<Subcategory>COMe Compact</Subcategory>
+					<Subcategory>COMe Basic</Subcategory>
+					<Subcategory>Qseven</Subcategory>
+				</Category>
+				<Category name="3.5&quot; SBC"></Category>
+				<Category name="2.5&quot; PICO-ITX"></Category>
+				<Category name="PC/104"></Category>
+				<Category name="EBX / 5.25&quot; SBC"></Category>
+				<Category name="MI/O"></Category>
+				<Category name="MI/O Extreme"></Category>
+				<Category name="PICMG 1.3 SBC"></Category>
+				<Category name="Mini-ITX"></Category>
+				<Category name="MicroATX"></Category>				
+				<Category name="ATX"></Category>
+				<Category name="E-ATX"></Category>
+				<Category name="EE-ATX"></Category>
+			</Categories>
+		</Level>
+		<Level name="System-Level">
+			<Categories>
+				<Category name="Industrial Servers/Storage"></Category>	
+				<Category name="Compact Embedded Systems"></Category>
+				<Category name="Networking Platforms"></Category>
+				<Category name="Gateways"></Category>
+				<Category name="Digital Signage Media Player"></Category>
+				<Category name="Point of Sale Systems"></Category>
+				<Category name="Transportation Systems"></Category>
+				<Category name="Industrial Mobile Computers"></Category>
+				<Category name="Industrial Portable Computers"></Category>
+				<Category name="Medical Computers"></Category>
+				<Category name="Medical Tablets"></Category>
+				<Category name="Self Service Touch Computers"></Category>
+			</Categories>
+		</Level>
+	</Levels>
+	<MarketSegments>
+		<MarketSegment name="Medical/Healthcare"></MarketSegment>
+		<MarketSegment name="Industrial Control"></MarketSegment>
+		<MarketSegment name="Oil &amp; Gas"></MarketSegment>
+		<MarketSegment name="Power &amp; Energy"></MarketSegment>
+		<MarketSegment name="Retail/Hospitality"></MarketSegment>
+		<MarketSegment name="Smart Manufacturing"></MarketSegment>
+		<MarketSegment name="Building Automation"></MarketSegment>
+		<MarketSegment name="Surveillance"></MarketSegment>
+		<MarketSegment name="Digital Signage"></MarketSegment>
+		<MarketSegment name="Transportation"></MarketSegment>
+		<MarketSegment name="Test &amp; Measurement"></MarketSegment>
+		<MarketSegment name="Gaming"></MarketSegment>
+		<MarketSegment name="Networks &amp; Telecom"></MarketSegment>
+	</MarketSegments>
+</xml>
