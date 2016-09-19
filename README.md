@@ -1,6 +1,7 @@
 # README #
 
-This is a temporary solution for AASC.Partner.
+to set up this project you will need sql express, visual studio, and possibly sql management server
+to init the database use command "update-database" in the nuget package manager console inside the server project
 
 ### What is this repository for? ###
 
