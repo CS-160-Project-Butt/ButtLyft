@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('homeController', ['$scope', 'authService', function ($scope, authService) {
+app.controller('homeController', ['$scope', '$location' ,'authService', function ($scope, $location, authService) {
     function containsAny(source, target) {
         for (var i = 0; i < target.length; i++) {
             for (var j = 0; j < source.length; j++) {
@@ -10,10 +10,19 @@ app.controller('homeController', ['$scope', 'authService', function ($scope, aut
         return false;
     };
 
+    $scope.toLogin = function () {
+        if (!authService.authentication.isAuth)
+        {
+            $location.path('/login');
+        }
+
+    }
+    $scope.toLogin();
+
     $scope.roles = [];
 
     $scope.authentication = authService.authentication;
-
+    
     authService.getUserRoles().then(function (resRoles) {
         $scope.roles = resRoles.data;
     });

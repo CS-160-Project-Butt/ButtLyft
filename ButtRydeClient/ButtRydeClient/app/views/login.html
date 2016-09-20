@@ -3,39 +3,27 @@
     document.location.href="/";
   }
 </script>
-<form role="form">
-    <div class="row">
-        <div class="col-md-2">
-            &nbsp;
-        </div>
-        <div class="col-md-4">
-            <h2 class="form-login-heading">Login</h2>
-            <input type="text" class="form-control" placeholder="Username" data-ng-model="loginData.userName" required autofocus>
-            <input type="password" class="form-control" placeholder="Password" data-ng-model="loginData.password" required>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" data-ng-model="loginData.useRefreshTokens"><strong> Use Refresh Tokens</strong>
-                </label>
-            </div>
-            <button class="btn btn-md btn-info btn-block" type="submit" data-ng-click="login()">Login</button>
-            <a href="/forgotPassword">Forgot Password?</a>
-            <div data-ng-hide="message == ''" class="alert alert-danger">
-                {{message}}
-            </div>
-        </div>
-        <div class="col-md-4">
-            &nbsp;
-        </div>
-        <!--
-        <div class="col-md-4">
-            <h2 class="form-login-heading">Social Logins</h2>
-            <p>Or you can login using one of the social logins bleow</p>
-            <button class="btn btn-large btn-facebook btn-block" type="button" data-ng-click="authExternalProvider('Facebook')"><i class="fa fa-facebook"></i> | Connect with Facebook</button>
-            <button class="btn btn-large btn-google-plus btn-block" type="button" data-ng-click="authExternalProvider('Google')"><i class="fa fa-google-plus"></i> | Connect with Google+</button>
-        </div>
-        -->
-        <div class="col-md-2">
-            &nbsp;
+<div class="login-page">
+
+    <div class="form">
+        <h1>Ryde.</h1>
+        <form class="register-form">
+            <input type="text" placeholder="name" />
+            <input type="password" placeholder="password" />
+            <input type="text" placeholder="email address" />
+            <button>create</button>
+            <p class="message">Already registered? <a href="#">Sign In</a></p>
+        </form>
+        <form class="login-form">
+            <input type="text" data-ng-model="vm.loginData.userName" required autofocus placeholder="Username" />
+            <input type="password" data-ng-model="vm.loginData.password" required placeholder="Password" />
+            <button data-ng-click="vm.login()">login</button>
+            <p class="message">Not registered? <a href="#">Create an account</a></p>
+        </form>
+
+        <div data-ng-hide="vm.message == ''" class="alert alert-danger">
+            {{vm.message}}
         </div>
     </div>
-</form>
+</div>
+

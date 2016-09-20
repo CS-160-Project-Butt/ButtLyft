@@ -1,7 +1,6 @@
 ﻿'use strict';
-app.controller('indexController', ['$q', '$timeout', '$http', '$scope', '$rootScope', '$location', 'authService', 'rolesService',
-    'messageDataService',
-    function ($q, $timeout, $http, $scope, $rootScope, $location, authService, rolesService, messageDataService) {
+app.controller('indexController', ['$q', '$timeout', '$http', '$scope', '$rootScope', '$location', 'authService',
+    function ($q, $timeout, $http, $scope, $rootScope, $location, authService) {
 
         $scope.notf1Options = {
             position: {
