@@ -45,7 +45,7 @@ app.factory('authService', ['$http', '$q', 'ngAuthSettings', 'localStorageServic
     };
 
     var _login = function (loginData) {
-
+        console.log(loginData);
         var data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password;
 
         /*

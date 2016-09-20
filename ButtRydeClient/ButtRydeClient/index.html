@@ -27,7 +27,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body ng-cloak ng-app="app" data-ng-controller="indexController">
+<body ng-cloak ng-app="app" data-ng-controller="indexCtrl as vm">
     <!-- Static navbar -->
     <div class="navbar navbar-inverse" role="navigation">
         <div class="container">
@@ -40,24 +40,17 @@
             </div>
             <div class="navbar-collapse collapse" ng-cloak>
                 <ul class="nav navbar-nav navbar-right">
-                    <li data-ng-hide="!authentication.isAuth"><a href="">Welcome {{authentication.userName}}</a></li>
+                    <li data-ng-hide="!vm.authentication.isAuth"><a href="">Welcome {{vm.authentication.userName}}</a></li>
                     <li class="active"><a href="/">Home</a></li>
                     <li><a href="/contact">Contact</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <b class="caret"></b></a>
                         <ul class="dropdown-menu">
 
-                            <li data-ng-hide="!authentication.isAuth"><a href="/applicationUsers">Application User</a></li>
-                            <li data-ng-hide="!authentication.isAuth"><a href="/companies">Company</a></li>
-                            <li data-ng-hide="!authentication.isAuth"><a href="/departments">Department</a></li>
-                            <li data-ng-hide="!authentication.isAuth"><a href="/employees">Employee</a></li>
-                            <li data-ng-hide="!isUserInRoles('ContentProvider')"><a href="/fileUpload">File Upload</a></li>
-                            <li data-ng-hide="!isUserInRoles('ContentProvider')"><a href="/resources">Resources</a></li>
-                            <li data-ng-hide="!isUserInRoles('ContentProvider')"><a href="/iotgRoadmap">Roadmap</a></li>
-                            <li data-ng-hide="!authentication.isAuth"><a href="" data-ng-click="logOut()">Logout</a></li>
-                            <li data-ng-hide="!authentication.isAuth"> <a href="/resetPassword">Reset Password</a></li>
-                            <li data-ng-hide="authentication.isAuth"> <a href="/login">Login</a></li>
-                            <li data-ng-hide="authentication.isAuth"> <a href="/signup">Sign Up</a></li>
+                            <li data-ng-hide="!vm.authentication.isAuth"><a href="" data-ng-click="vm.logOut()">Logout</a></li>
+                            <li data-ng-hide="!vm.authentication.isAuth"> <a href="/resetPassword">Reset Password</a></li>
+                            <li data-ng-hide="vm.authentication.isAuth"> <a href="/login">Login</a></li>
+                            <li data-ng-hide="vm.authentication.isAuth"> <a href="/signup">Sign Up</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -114,45 +107,8 @@
     <script src="app/app.js"></script>
 
     <!-- Load view models -->
-    <script src="app/viewModels/displayUserBindingModel.js"></script>
-    <script src="app/viewModels/resourceViewModel.js"></script>
-    <script src="app/viewModels/employeeViewModel.js"></script>
-    <script src="app/viewModels/datasheetViewModel.js"></script>
-    <script src="app/viewModels/iotgRoadmapViewModel.js"></script>
-    <script src="app/viewModels/companyViewModel.js"></script>
-    <script src="app/viewModels/departmentViewModel.js"></script>
-    <script src="app/viewModels/parentDeparementViewModel.js"></script>
-    <script src="app/viewModels/departmentDisplayViewModel.js"></script>
-    <script src="app/viewModels/employeeDisplayViewModel.js"></script>
-    <script src="app/viewModels/companyListViewModel.js"></script>
-    <script src="app/viewModels/departmentListViewModel.js"></script>
-    <script src="app/viewModels/employeeListViewModel.js"></script>
-    <script src="app/viewModels/applicationUserViewModel.js"></script>
-
-    <script src="app/viewModels/claform/claFormViewModel.js"></script>
 
     <!-- Load data source -->
-    <script src="app/dataSources/resourcesDataSource.js"></script>
-    <script src="app/dataSources/downloadDataSource.js"></script>
-    <script src="app/dataSources/iotgRoadmapDataSource.js"></script>
-    <script src="app/dataSources/intelPlatformDataSource.js"></script>
-    <script src="app/dataSources/intelMarketSegmentDataSource.js"></script>
-    <script src="app/dataSources/intelRoadmapStatusDataSource.js"></script>
-    <script src="app/dataSources/intelPlatformTrimDataSource.js"></script>
-    <script src="app/dataSources/intelModelLevelCategoryDataSource.js"></script>
-    <script src="app/dataSources/intelModelLevelCategorySubcategoryDataSource.js"></script>
-    <script src="app/dataSources/intelModelLevelDataSource.js"></script>
-    <script src="app/dataSources/intelPlatformTrimCodeNameDataSource.js"></script>
-    <script src="app/dataSources/companiesDataSource.js"></script>
-    <script src="app/dataSources/departmentsDataSource.js"></script>
-    <script src="app/dataSources/employeesDataSource.js"></script>
-    <script src="app/dataSources/applicationUsersDataSource.js"></script>
-
-    <script src="app/dataSources/claform/claFormDataSource.js"></script>
-
-
-
-
 
     <!-- Load services -->
     <script src="app/services/authService.js"></script>
@@ -161,9 +117,8 @@
 
     <!-- Load controllers -->
     <script src="app/controllers/homeController.js"></script>
-    <script src="app/controllers/indexController.js"></script>
-    <script src="app/controllers/loginController.js"></script>
-
+    <script src="app/controllers/indexCtrl.js"></script>
+    <script src="app/controllers/loginCtrl.js"></script>
 
     <!-- Load filters -->
     <script src="app/filters/tel.js"></script>

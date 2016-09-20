@@ -155,8 +155,8 @@
     <Content Include="app\controllers\downloadsController.js" />
     <Content Include="app\controllers\fileUploadController.js" />
     <Content Include="app\controllers\homeController.js" />
-    <Content Include="app\controllers\indexController.js" />
-    <Content Include="app\controllers\loginController.js" />
+    <Content Include="app\controllers\indexCtrl.js" />
+    <Content Include="app\controllers\loginCtrl.js" />
     <Content Include="app\controllers\modalInstanceController.js" />
     <Content Include="app\controllers\ordersController.js" />
     <Content Include="app\controllers\refreshController.js" />

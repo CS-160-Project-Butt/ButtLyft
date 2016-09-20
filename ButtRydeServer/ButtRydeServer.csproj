@@ -390,6 +390,10 @@
     <Compile Include="Migrations\201608190028122_ConvertCLAStatusDateToDateTimeNullable.Designer.cs">
       <DependentUpon>201608190028122_ConvertCLAStatusDateToDateTimeNullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609201956262_init2.cs" />
+    <Compile Include="Migrations\201609201956262_init2.Designer.cs">
+      <DependentUpon>201609201956262_init2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -554,12 +558,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AASC.FW\FW.csproj">
-      <Project>{a3e338ba-38dd-463f-9199-1554a01737f8}</Project>
-      <Name>FW</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Migrations\201604261742211_Initial.resx">
       <DependentUpon>201604261742211_Initial.cs</DependentUpon>
     </EmbeddedResource>
@@ -605,6 +603,15 @@
     <EmbeddedResource Include="Migrations\201608190028122_ConvertCLAStatusDateToDateTimeNullable.resx">
       <DependentUpon>201608190028122_ConvertCLAStatusDateToDateTimeNullable.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609201956262_init2.resx">
+      <DependentUpon>201609201956262_init2.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FW\FW.csproj">
+      <Project>{a3e338ba-38dd-463f-9199-1554a01737f8}</Project>
+      <Name>FW</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

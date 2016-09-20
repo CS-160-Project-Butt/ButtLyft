@@ -13,7 +13,7 @@ app.config(function ($routeProvider, $locationProvider) {
     });
 
     $routeProvider.when("/login", {
-        controller: "loginController as vm",
+        controller: "loginCtrl as vm",
         templateUrl: "/app/views/login.html"
     });
 

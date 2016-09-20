@@ -15,7 +15,6 @@ app.controller('homeController', ['$scope', '$location' ,'authService', function
         {
             $location.path('/login');
         }
-
     }
     $scope.toLogin();
 

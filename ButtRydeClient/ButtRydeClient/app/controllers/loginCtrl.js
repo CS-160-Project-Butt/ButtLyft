@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('loginController', ['$location', 'authService', 'ngAuthSettings', function ($location, authService, ngAuthSettings) {
+app.controller('loginCtrl', ['$location', 'authService', 'ngAuthSettings', function ($location, authService, ngAuthSettings) {
     var vm = this;
     vm.loginData = {
         userName: "",
@@ -10,10 +10,8 @@ app.controller('loginController', ['$location', 'authService', 'ngAuthSettings',
     vm.message = '';
 
     vm.login = function () {
-
         authService.login(vm.loginData).then(function (response) {
-            $location.path('/dash');
-
+            $location.path('/home');
         },
          function (err) {
              vm.message = err.error_description;
