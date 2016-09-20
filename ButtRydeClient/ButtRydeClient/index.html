@@ -1,27 +1,17 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta name="keywords" content="Advantech Partner Zone" />
-    <meta name="description" content="Advantech Partner zone" />
+    <meta name="keywords" content="Ryde" />
+    <meta name="description" content="Ryde" />
     <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
 
-    <title>Advantech Partner Zone</title>
+    <title>Ryde.</title>
     <base href="/">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
-
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.412/styles/kendo.common.min.css" />
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.412/styles/kendo.rtl.min.css" />
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.412/styles/kendo.silver.min.css" />
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.412/styles/kendo.mobile.all.min.css" />
-
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2016.1.412/js/angular.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2016.1.412/js/kendo.all.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
@@ -33,14 +23,11 @@
     <link href="content/css/modal.css" rel="stylesheet" />
     <link href="content/css/bootstrap-additions.css" rel="stylesheet" />
 
-    <link href="content/css/site.css" rel="stylesheet" />
+    <link href="content/css/login.css" rel="stylesheet" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body ng-cloak ng-app="app" data-ng-controller="indexController">
-    <div class="container" style="padding: 10px">
-        <a href="/"><img src="http://advcloudfiles.advantech.com/web/Images/common/advantech-logo.png" /></a>
-    </div>
     <!-- Static navbar -->
     <div class="navbar navbar-inverse" role="navigation">
         <div class="container">
@@ -53,15 +40,13 @@
             </div>
             <div class="navbar-collapse collapse" ng-cloak>
                 <ul class="nav navbar-nav navbar-right">
+                    <li data-ng-hide="!authentication.isAuth"><a href="">Welcome {{authentication.userName}}</a></li>
                     <li class="active"><a href="/">Home</a></li>
-                    <li><a href="/claform">CLA Form</a></li>
-                    <li data-ng-show="isUserInRoles('Sales')||isUserInRoles('SalesManager')||isUserInRoles('ProductManager')||isUserInRoles('Admin')"><a href="/claform/admin">CLA Form Admin</a></li>
                     <li><a href="/contact">Contact</a></li>
-                    <li data-ng-hide="!authentication.isAuth"><a href="/downloads">Downloads</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li data-ng-hide="!authentication.isAuth"><a href="">Welcome {{authentication.userName}}</a></li>
+
                             <li data-ng-hide="!authentication.isAuth"><a href="/applicationUsers">Application User</a></li>
                             <li data-ng-hide="!authentication.isAuth"><a href="/companies">Company</a></li>
                             <li data-ng-hide="!authentication.isAuth"><a href="/departments">Department</a></li>
@@ -88,49 +73,10 @@
     <!--
     <div class="jumbotron" data-ng-hide="authentication.isAuth">    
     -->
-    <div class="jumbotron" data-ng-show="(loc() == '/home')||(loc() == '/contact')">
-        <div class="container">
-            <div class="page-header text-center">
-                <h1>Welcome to Advantech US Partner Zone</h1>
-            </div>
-            <p class="text-center">Advantech US Partner Zone is a portal for Advantech partners. </p>
 
-        </div>
-    </div>
 
     <div class="container">
         <div>
-            <!--
-            <span kendo-notification="notf1" k-options="notf1Options"></span>
-            -->
-            <span id="popupNotification"></span>
-            <script id="errorTemplate" type="text/x-kendo-template">
-                <div class="wrong-pass">
-                    <img src="Images/error-icon.png" />
-                    <h3>#= title #</h3>
-                    <p>#= time #</p>
-                    <p>#= message #</p>
-                </div>
-                <!--
-                <p style="width: 16em; padding:1em;white-space:nowrap"> {{ngMessage}}, #= kValue # </p>
-                -->
-            </script>
-            <script id="successTemplate" type="text/x-kendo-template">
-                <div class="upload-success">
-                    <img src="Images/success-icon.png" />
-                    <h3>#= title #</h3>
-                    <p>#= time #</p>
-                    <p>#= message #</p>
-                </div>
-            </script>
-            <script id="emailTemplate" type="text/x-kendo-template">
-                <div class="new-mail">
-                    <img src="Images/envelope.png" />
-                    <h3>#= title #</h3>
-                    <p>#= time #</p>
-                    <p>#= message #</p>
-                </div>
-            </script>
             <div data-ng-view="">
             </div>
         </div>
@@ -141,7 +87,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <p class="text-muted">2016 Advantech</p>
+                    <p class="text-muted">2016 Ryde.</p>
                 </div>
                 <div class="col-md-6">
                     <p class="text-muted"></p>
@@ -152,8 +98,6 @@
     <!--
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.js"></script>
     -->
-    <script src="http://cdn.kendostatic.com/2016.1.226/js/jszip.min.js"></script>
-
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular-animate.min.js"></script>
     <script src="Scripts/angular/angular-ui/ui-bootstrap-tpls-1.2.5.js"></script>
@@ -211,48 +155,15 @@
 
 
     <!-- Load services -->
-    <script src="app/services/authInterceptorService.js"></script>
     <script src="app/services/authService.js"></script>
-    <script src="app/services/messageService.js"></script>
-    <script src="app/services/ordersService.js"></script>
-    <script src="app/services/resourcesService.js"></script>
-    <script src="app/services/rolesService.js"></script>
-    <script src="app/services/tokensManagerService.js"></script>
-    <script src="app/services/userService.js"></script>
-    <script src="app/services/dialogService.js"></script>
-    <script src="app/services/companyListService.js"></script>
-    <script src="app/services/departmentListService.js"></script>
-    <script src="app/services/employeeListService.js"></script>
-    <script src="app/services/applicationUserListService.js"></script>
-    <script src="app/services/messageDataService.js"></script>
-
+    <script src="app/services/authInterceptorService.js"></script>
     <script src="app/services/claForm/claFormService.js"></script>
 
     <!-- Load controllers -->
-    <script src="app/controllers/associateController.js"></script>
-    <script src="app/controllers/contactController.js"></script>
-    <script src="app/controllers/fileUploadController.js"></script>
     <script src="app/controllers/homeController.js"></script>
     <script src="app/controllers/indexController.js"></script>
-    <script src="app/controllers/loginController.js"></script>    
-    <script src="app/controllers/ordersController.js"></script>
-    <script src="app/controllers/refreshController.js"></script>
-    <script src="app/controllers/resourcesController.js"></script>
-    <script src="app/controllers/signupController.js"></script>
-    <script src="app/controllers/tokensManagerController.js"></script>
-    <script src="app/controllers/downloadsController.js"></script>
-    <script src="app/controllers/usersController.js"></script>
-    <script src="app/controllers/iotgRoadmapController.js"></script>
-    <script src="app/controllers/companiesController.js"></script>
-    <script src="app/controllers/departmentsController.js"></script>
-    <script src="app/controllers/employeesController.js"></script>
-    <script src="app/controllers/applicationUsersController.js"></script>
+    <script src="app/controllers/loginController.js"></script>
 
-    <script src="app/controllers/claForm/ClaFormCtrl.js"></script>
-    <script src="app/controllers/claForm/ClaViewCtrl.js"></script>
-    <script src="app/controllers/claForm/ClaAdminCtrl.js"></script>
-    <script src="app/controllers/claForm/ThanksCtrl.js"></script>
-    <script src="app/controllers/claForm/ViewEditModalInstance.js"></script>
 
     <!-- Load filters -->
     <script src="app/filters/tel.js"></script>
