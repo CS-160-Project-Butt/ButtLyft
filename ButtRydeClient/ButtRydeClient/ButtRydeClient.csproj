@@ -66,13 +66,53 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\controllers\applicationUsersController.js" />
     <Content Include="app\controllers\claForm\ClaAdminCtrl.js" />
     <Content Include="app\controllers\claForm\ViewEditModalInstance.js" />
     <Content Include="app\controllers\claForm\ClaViewCtrl.js" />
     <Content Include="app\controllers\claForm\ClaFormCtrl.js" />
     <Content Include="app\controllers\claForm\ThanksCtrl.js" />
+    <Content Include="app\controllers\companiesController.js" />
+    <Content Include="app\controllers\departmentsController.js" />
+    <Content Include="app\controllers\employeesController.js" />
+    <Content Include="app\controllers\iotgRoadmapController.js" />
+    <Content Include="app\dataSources\applicationUsersDataSource.js" />
+    <Content Include="app\dataSources\claform\claFormDataSource.js" />
+    <Content Include="app\dataSources\companiesDataSource.js" />
+    <Content Include="app\dataSources\departmentsDataSource.js" />
+    <Content Include="app\dataSources\employeesDataSource.js" />
+    <Content Include="app\dataSources\intelMarketSegmentDataSource.js" />
+    <Content Include="app\dataSources\intelModelLevelCategoryDataSource.js" />
+    <Content Include="app\dataSources\intelModelLevelCategorySubcategoryDataSource.js" />
+    <Content Include="app\dataSources\intelModelLevelDataSource.js" />
+    <Content Include="app\dataSources\intelPlatformDataSource.js" />
+    <Content Include="app\dataSources\intelPlatformTrimCodeNameDataSource.js" />
+    <Content Include="app\dataSources\intelPlatformTrimDataSource.js" />
+    <Content Include="app\dataSources\intelRoadmapStatusDataSource.js" />
+    <Content Include="app\dataSources\iotgRoadmapDataSource.js" />
     <Content Include="app\filters\tel.js" />
+    <Content Include="app\services\applicationUserListService.js" />
     <Content Include="app\services\claForm\claFormService.js" />
+    <Content Include="app\services\dialogService.js" />
+    <Content Include="app\services\messageDataService.js" />
+    <Content Include="app\viewModels\applicationUserViewModel.js" />
+    <Content Include="app\viewModels\claform\claFormViewModel.js" />
+    <Content Include="app\viewModels\companyListViewModel.js" />
+    <Content Include="app\viewModels\companyViewModel.js" />
+    <Content Include="app\viewModels\datasheetViewModel.js" />
+    <Content Include="app\viewModels\departmentDisplayViewModel.js" />
+    <Content Include="app\viewModels\departmentListViewModel.js" />
+    <Content Include="app\viewModels\departmentViewModel.js" />
+    <Content Include="app\viewModels\employeeDisplayViewModel.js" />
+    <Content Include="app\viewModels\employeeListViewModel.js" />
+    <Content Include="app\viewModels\employeeViewModel.js" />
+    <Content Include="app\viewModels\iotgRoadmapViewModel.js" />
+    <Content Include="app\viewModels\parentDeparementViewModel.js" />
+    <Content Include="app\views\applicationUsers.html" />
+    <Content Include="app\views\companies.html" />
+    <Content Include="app\views\departments.html" />
+    <Content Include="app\views\employees.html" />
+    <Content Include="app\views\iotgRoadmap.html" />
     <Content Include="content\bootstrap-theme.css" />
     <Content Include="content\bootstrap-theme.min.css" />
     <Content Include="content\bootstrap.css" />
@@ -110,13 +150,44 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\controllers\associateController.js" />
+    <Content Include="app\controllers\contactController.js" />
+    <Content Include="app\controllers\downloadsController.js" />
+    <Content Include="app\controllers\fileUploadController.js" />
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\controllers\indexCtrl.js" />
     <Content Include="app\controllers\loginCtrl.js" />
+    <Content Include="app\controllers\modalInstanceController.js" />
+    <Content Include="app\controllers\ordersController.js" />
+    <Content Include="app\controllers\refreshController.js" />
+    <Content Include="app\controllers\resourcesController.js" />
+    <Content Include="app\controllers\signupController.js" />
+    <Content Include="app\controllers\tokensManagerController.js" />
+    <Content Include="app\controllers\usersController.js" />
+    <Content Include="app\dataSources\downloadDataSource.js" />
+    <Content Include="app\dataSources\resourcesDataSource.js" />
     <Content Include="app\services\authInterceptorService.js" />
     <Content Include="app\services\authService.js" />
+    <Content Include="app\services\messageService.js" />
+    <Content Include="app\services\rolesService.js" />
+    <Content Include="app\viewModels\displayUserBindingModel.js" />
+    <Content Include="app\viewModels\resourceViewModel.js" />
+    <Content Include="app\views\associate.html" />
+    <Content Include="app\views\contact.html" />
+    <Content Include="app\views\fileUpload.html" />
+    <Content Include="app\views\forgotPassword.html" />
+    <Content Include="app\views\forgotPasswordConfirmation.html" />
     <Content Include="app\views\home.html" />
     <Content Include="app\views\login.html" />
+    <Content Include="app\views\orders.html" />
+    <Content Include="app\views\refresh.html" />
+    <Content Include="app\views\resetPassword.html" />
+    <Content Include="app\views\resetPasswordConfirmation.html" />
+    <Content Include="app\views\resources1.html" />
+    <Content Include="app\views\resources2.html" />
+    <Content Include="app\views\resourcesx.html" />
+    <Content Include="app\views\signup.html" />
+    <Content Include="app\views\tokens.html" />
     <Content Include="index.html" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
@@ -146,10 +217,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="app\dataSources\" />
-    <Folder Include="app\viewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
