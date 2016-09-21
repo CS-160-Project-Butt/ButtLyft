@@ -1,15 +1,10 @@
-﻿var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'LocalStorageModule', 'angular-loading-bar', 'angularFileUpload']);
+﻿var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'LocalStorageModule', 'angular-loading-bar']);
 
 app.config(function ($routeProvider, $locationProvider) {
 
     $routeProvider.when("/home", {
         controller: "homeController",
         templateUrl: "/app/views/home.html"
-    });
-
-    $routeProvider.when("/contact", {
-        controller: "contactController",
-        templateUrl: "/app/views/contact.html"
     });
 
     $routeProvider.when("/login", {

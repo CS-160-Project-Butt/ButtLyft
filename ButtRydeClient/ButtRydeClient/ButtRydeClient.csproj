@@ -66,16 +66,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\controllers\applicationUsersController.js" />
-    <Content Include="app\controllers\claForm\ClaAdminCtrl.js" />
-    <Content Include="app\controllers\claForm\ViewEditModalInstance.js" />
-    <Content Include="app\controllers\claForm\ClaViewCtrl.js" />
-    <Content Include="app\controllers\claForm\ClaFormCtrl.js" />
-    <Content Include="app\controllers\claForm\ThanksCtrl.js" />
-    <Content Include="app\controllers\companiesController.js" />
-    <Content Include="app\controllers\departmentsController.js" />
-    <Content Include="app\controllers\employeesController.js" />
-    <Content Include="app\controllers\iotgRoadmapController.js" />
     <Content Include="app\dataSources\applicationUsersDataSource.js" />
     <Content Include="app\dataSources\claform\claFormDataSource.js" />
     <Content Include="app\dataSources\companiesDataSource.js" />
@@ -150,20 +140,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
-    <Content Include="app\controllers\associateController.js" />
-    <Content Include="app\controllers\contactController.js" />
-    <Content Include="app\controllers\downloadsController.js" />
-    <Content Include="app\controllers\fileUploadController.js" />
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\controllers\indexCtrl.js" />
     <Content Include="app\controllers\loginCtrl.js" />
-    <Content Include="app\controllers\modalInstanceController.js" />
-    <Content Include="app\controllers\ordersController.js" />
-    <Content Include="app\controllers\refreshController.js" />
-    <Content Include="app\controllers\resourcesController.js" />
-    <Content Include="app\controllers\signupController.js" />
-    <Content Include="app\controllers\tokensManagerController.js" />
-    <Content Include="app\controllers\usersController.js" />
     <Content Include="app\dataSources\downloadDataSource.js" />
     <Content Include="app\dataSources\resourcesDataSource.js" />
     <Content Include="app\services\authInterceptorService.js" />
