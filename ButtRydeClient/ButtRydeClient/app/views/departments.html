@@ -1,0 +1,141 @@
+﻿<script type="text/javascript">
+    if (typeof app === 'undefined') {
+    document.location.href="/";
+  }
+</script>
+<div class="container">
+    <div class="page-header text-center">
+        <h3>Department Settings</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <input id="companyddl" kendo-drop-down-list k-data-source="companies" k-ng-model="companySelected"
+               k-data-text-field="'name'" k-data-value-field="'name'" data-bind="value: name" />{{ companySelected.id }}
+        <div class="demo-section">
+            <div class="k-content" style="width: 100%;">                
+                <div id="grid"
+                     kendo-grid="grid"
+                     k-data-source="dataSource"
+                     k-sortable="{ mode: 'multiple' }"
+                     k-resizable="true"
+                     k-pageable='{ pageSizes: true, refresh: true, buttonCount: 5 }'
+                     k-filterable="true"
+                     k-editable='{ mode: "popup", template: popupEditorTemplate }'
+                     k-selectable="'row'"
+                     k-toolbar='[ { template: toolbarTemplate } ]'
+                     k-columns='[
+                        { field: "id", title: "Id", hidden: true },
+                        { field: "name", title: "Name" },
+                        { field: "companyId", title: "Company Id", hidden: true },
+                        { field: "companyName", title: "Company" },
+                        { field: "parentDepartmentId", title: "Parent Department Id" },
+                        { field: "parentDepartmentName", title: "Parent Department" },
+                        { field: "departmentHeadEmployeeId", title: "Department Head Employee Id" },
+                        { field: "departmentHeadUserName", title: "Department Head" },
+                        { field: "createdById", title: "Created By Id", hidden: true },
+                        { field: "createdByUserName", title: "Created By", editor: readOnlyEditor },   
+                        { field: "createdDate", title: "Created On", format: "{0:MM-dd-yyyy HH:mm:ss tt}" },                        
+                     ]'
+                     k-save="save"
+                     k-cancel="cancel"
+                     k-on-delete="destroy"
+                     k-on-data-bound="onDataBound(kendoEvent)"
+                     k-on-change="onChange(kendoEvent)">
+                </div>
+                <style scoped>
+                    .toolbar {
+                        padding: 15px;
+                        float: right;
+                    }
+                </style>
+            </div>
+        </div>
+        <script type="text/x-kendo-template" id="toolbar-department">
+            <div>                
+                <div class="toolbar">
+                    <button kendo-button ng-click="new(this)"><span class="k-icon k-i-plus"></span>New</button>
+                    <button kendo-button ng-click="edit(this)"><span class="k-icon k-i-pencil"></span>Edit</button>
+                    <button kendo-button ng-click="destroy(this)"><span class="glyphicon glyphicon-trash"></span>Delete</button>                    
+                </div>
+            </div>
+        </script>
+        <script id="popup_editor_department" type="text/x-kendo-template">
+            <p class="k-edit-label">Department Editor</p>
+            <div class="k-edit-form-container">
+                <div class="k-edit-label">
+                    <label for="id">Department Id</label>
+                </div>
+                <div class="k-edit-field">
+                    <input type="text" class="k-input k-textbox" name="id" data-bind="value:id" />
+                </div>
+                <div class="k-edit-label">
+                    <label for="name">Department Name</label>
+                </div>
+                <div class="k-edit-field">
+                    <input type="text" class="k-input k-textbox" name="name" data-bind="value:name" />
+                </div>
+                <div class="k-edit-label">
+                    <label for="companyId">Company Id</label>
+                </div>
+                <div class="k-edit-field">
+                    <input type="text" class="k-input k-textbox" name="companyId" data-bind="value:companyId" readonly />
+                </div>
+                <div class="k-edit-label">
+                    <label for="companyName">Company</label>
+                </div>
+                <div class="k-edit-field">
+                    <input type="text" class="k-input k-textbox" name="companyName" data-bind="value:companyName" readonly />
+                </div>
+                <div class="k-edit-label">
+                    <label for="parentDepartmentId">Parent Department Id</label>
+                </div>
+                <div class="k-edit-field">
+                    <input type="text" class="k-input k-textbox" name="parentDepartmentId" data-bind="value:parentDepartmentId" readonly />
+                </div>
+                <div class="k-edit-label">
+                    <label for="parentDepartmentName">Parent Department Name</label>
+                </div>
+                <div class="k-edit-field">
+                    <input name="parentDepartmentName" kendo-drop-down-list 
+                           k-data-source="parentDepartments" 
+                           k-on-change="handleChange(data, dataItem, columns)"
+                           k-data-text-field="'name'"
+                           k-data-value-field="'name'"
+                           data-bind="value: parentDepartmentName" />
+                </div>
+                <div class="k-edit-label">
+                    <label for="departmentHeadEmployeeId">Department Head Employee Id</label>
+                </div>
+                <div class="k-edit-field">
+                    <input type="text" class="k-input k-textbox" name="departmentHeadEmployeeId" data-bind="value:departmentHeadEmployeeId" readonly />
+                </div>
+                <div class="k-edit-label">
+                    <label for="departmentHeadUserName">Department Head</label>
+                </div>
+                <div class="k-edit-field">
+                    <input k-on-change="handleAutoCompleteChange(data, dataItem, columns)"
+                           kendo-auto-complete
+                           k-data-text-field="'userName'"
+                           k-data-source="departmentHeads"
+                           data-bind="value: departmentHeadUserName" />                    
+                    <!--
+                    <input type="text" class="k-input k-textbox" name="departmentHead.applicationUser.username" data-bind="value:departmentHead.applicationUser.username" />
+                    -->
+                </div>
+                <div class="k-edit-label">
+                    <label for="createdDate">Created On</label>
+                </div>
+                <div class="k-edit-field">
+                    <input type="text" class="k-input k-textbox" name="createdDate" data-bind="value:createdDate" readonly />
+                </div>
+                <div class="k-edit-label">
+                    <label for="createdByUserName">Created By</label>
+                </div>
+                <div class="k-edit-field">
+                    <input type="text" class="k-input k-textbox" name="createdByUserName" data-bind="value:createdByUserName" readonly />
+                </div>
+            </div>
+        </script>
+    </div>
+</div>
