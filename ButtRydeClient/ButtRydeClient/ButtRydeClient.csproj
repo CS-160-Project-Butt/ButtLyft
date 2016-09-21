@@ -67,10 +67,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\filters\tel.js" />
-    <Content Include="app\services\applicationUserListService.js" />
-    <Content Include="app\services\claForm\claFormService.js" />
-    <Content Include="app\services\dialogService.js" />
-    <Content Include="app\services\messageDataService.js" />
     <Content Include="app\views\applicationUsers.html" />
     <Content Include="app\views\companies.html" />
     <Content Include="app\views\departments.html" />
@@ -118,8 +114,6 @@
     <Content Include="app\controllers\loginCtrl.js" />
     <Content Include="app\services\authInterceptorService.js" />
     <Content Include="app\services\authService.js" />
-    <Content Include="app\services\messageService.js" />
-    <Content Include="app\services\rolesService.js" />
     <Content Include="app\views\associate.html" />
     <Content Include="app\views\contact.html" />
     <Content Include="app\views\fileUpload.html" />
