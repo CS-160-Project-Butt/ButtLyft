@@ -66,20 +66,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\dataSources\applicationUsersDataSource.js" />
-    <Content Include="app\dataSources\claform\claFormDataSource.js" />
-    <Content Include="app\dataSources\companiesDataSource.js" />
-    <Content Include="app\dataSources\departmentsDataSource.js" />
-    <Content Include="app\dataSources\employeesDataSource.js" />
-    <Content Include="app\dataSources\intelMarketSegmentDataSource.js" />
-    <Content Include="app\dataSources\intelModelLevelCategoryDataSource.js" />
-    <Content Include="app\dataSources\intelModelLevelCategorySubcategoryDataSource.js" />
-    <Content Include="app\dataSources\intelModelLevelDataSource.js" />
-    <Content Include="app\dataSources\intelPlatformDataSource.js" />
-    <Content Include="app\dataSources\intelPlatformTrimCodeNameDataSource.js" />
-    <Content Include="app\dataSources\intelPlatformTrimDataSource.js" />
-    <Content Include="app\dataSources\intelRoadmapStatusDataSource.js" />
-    <Content Include="app\dataSources\iotgRoadmapDataSource.js" />
     <Content Include="app\filters\tel.js" />
     <Content Include="app\services\applicationUserListService.js" />
     <Content Include="app\services\claForm\claFormService.js" />
@@ -143,8 +129,6 @@
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\controllers\indexCtrl.js" />
     <Content Include="app\controllers\loginCtrl.js" />
-    <Content Include="app\dataSources\downloadDataSource.js" />
-    <Content Include="app\dataSources\resourcesDataSource.js" />
     <Content Include="app\services\authInterceptorService.js" />
     <Content Include="app\services\authService.js" />
     <Content Include="app\services\messageService.js" />
