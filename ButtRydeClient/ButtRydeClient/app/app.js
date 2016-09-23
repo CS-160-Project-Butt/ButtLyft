@@ -1,4 +1,4 @@
-﻿var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'LocalStorageModule', 'angular-loading-bar']);
+﻿var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'LocalStorageModule']);
 
 app.config(function ($routeProvider, $locationProvider) {
 
@@ -25,11 +25,7 @@ app.config(function ($routeProvider, $locationProvider) {
 //dev
 //var serviceBase = 'http://localhost:50918/';
 var serviceBase = 'http://localhost:1272/';
-//production
-//var serviceBase = 'http://partners.advantech.com:81/';
-//qa
-//var serviceBase = 'http://partners.advantech.com:8081/';
-//var serviceBase = 'http://ngauthenticationapi.azurewebsites.net/';
+
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
     clientId: 'ngAuthApp'

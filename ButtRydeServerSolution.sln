@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ButtRydeServer", "ButtRydeServer\ButtRydeServer.csproj", "{BECAF2A3-2A63-4384-8EFF-F7B6C4BA59C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ButtRydeClient", "ButtRydeClient\ButtRydeClient\ButtRydeClient.csproj", "{01619C13-C183-44C6-A0DA-D7FDF0D4E0B0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FW", "FW\FW.csproj", "{A3E338BA-38DD-463F-9199-1554A01737F8}"
 EndProject
 Global
@@ -19,10 +17,6 @@ Global
 		{BECAF2A3-2A63-4384-8EFF-F7B6C4BA59C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BECAF2A3-2A63-4384-8EFF-F7B6C4BA59C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BECAF2A3-2A63-4384-8EFF-F7B6C4BA59C9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{01619C13-C183-44C6-A0DA-D7FDF0D4E0B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01619C13-C183-44C6-A0DA-D7FDF0D4E0B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{01619C13-C183-44C6-A0DA-D7FDF0D4E0B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{01619C13-C183-44C6-A0DA-D7FDF0D4E0B0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A3E338BA-38DD-463F-9199-1554A01737F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A3E338BA-38DD-463F-9199-1554A01737F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3E338BA-38DD-463F-9199-1554A01737F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
