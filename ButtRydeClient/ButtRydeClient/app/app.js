@@ -3,13 +3,18 @@
 app.config(function ($routeProvider, $locationProvider) {
 
     $routeProvider.when("/home", {
-        controller: "homeController",
+        controller: "homeCtrl as vm",
         templateUrl: "/app/views/home.html"
     });
 
     $routeProvider.when("/login", {
         controller: "loginCtrl as vm",
         templateUrl: "/app/views/login.html"
+    });
+
+    $routeProvider.when("/userList", {
+        controller: "userListCtrl as vm",
+        templateUrl: "/app/views/userList.html"
     });
 
 

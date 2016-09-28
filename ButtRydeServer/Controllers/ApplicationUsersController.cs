@@ -10,12 +10,12 @@ using System.Web.Http;
 
 namespace AASC.Partner.API.Controllers
 {
-    [ClaimsAuthorization(ClaimType = "Active", ClaimValue = "1")]
     [RoutePrefix("api/applicationusers")]
     public class ApplicationUsersController : BaseApiController
     {
         [HttpGet]
         [Route("getavailableuserslist")]
+        [AllowAnonymous]
         public IHttpActionResult GetAvailableUsersList()
         {
             try
@@ -37,6 +37,27 @@ namespace AASC.Partner.API.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("getallusersjson")]
+        public IHttpActionResult GetAllUsersJson()
+        {
+            try
+            {
+                List<DisplayUserBindingModel> results = new List<DisplayUserBindingModel>();
+                var users = this.AppUserManager.Users.Where(x => x.IsActive).ToList();
+
+                users.ForEach(x =>
+                {
+                    results.Add(DataMapper.Map<ApplicationUser, DisplayUserBindingModel>(x));
+                });
+
+                return Ok(new { data = results, total = results.Count() });
+            }
+            catch(Exception ex)
+            {
+                throw new ApiException { ErrorCode =  (int)HttpStatusCode.BadRequest, ErrorDescription = string.Format("Bad Request...{0}", ex.Message) };
+            }
+        }
         [HttpGet]
         [Route("")]
         public IHttpActionResult Get()
@@ -87,7 +108,7 @@ namespace AASC.Partner.API.Controllers
                 return Ok(DataMapper.Map<ApplicationUser, ApplicationUserViewModel>(user));
             else
                 return BadRequest();
-            
+
         }
     }
 }

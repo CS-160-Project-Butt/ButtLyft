@@ -71,11 +71,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\controllers\userListCtrl.js" />
     <Content Include="app\filters\tel.js" />
     <Content Include="app\views\applicationUsers.html" />
     <Content Include="app\views\companies.html" />
     <Content Include="app\views\departments.html" />
     <Content Include="app\views\employees.html" />
+    <Content Include="app\views\userList.html" />
     <Content Include="app\views\iotgRoadmap.html" />
     <Content Include="content\bootstrap-theme.css" />
     <Content Include="content\bootstrap-theme.min.css" />
@@ -114,7 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
-    <Content Include="app\controllers\homeController.js" />
+    <Content Include="app\controllers\homeCtrl.js" />
     <Content Include="app\controllers\indexCtrl.js" />
     <Content Include="app\controllers\loginCtrl.js" />
     <Content Include="app\services\authInterceptorService.js" />

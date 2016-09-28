@@ -1,5 +1,6 @@
 ﻿'use strict';
-app.controller('homeController', ['$scope', '$location' ,'authService', function ($scope, $location, authService) {
+app.controller('userListCtrl', ['$location' ,'authService', function ($location, authService) {
+    var vm = this;
     function containsAny(source, target) {
         for (var i = 0; i < target.length; i++) {
             for (var j = 0; j < source.length; j++) {
@@ -10,23 +11,36 @@ app.controller('homeController', ['$scope', '$location' ,'authService', function
         return false;
     };
 
-    $scope.toLogin = function () {
+
+
+    vm.toLogin = function () {
         if (!authService.authentication.isAuth)
         {
             $location.path('/login');
         }
     }
-    $scope.toLogin();
+    vm.toLogin();
 
-    $scope.roles = [];
+    vm.roles = [];
 
-    $scope.authentication = authService.authentication;
+    vm.authentication = authService.authentication;
     
+
+
+
     authService.getUserRoles().then(function (resRoles) {
-        $scope.roles = resRoles.data;
+        vm.roles = resRoles.data;
     });
 
-    $scope.isUserInRoles = function (roles) {
+    vm.allUsersList;
+    authService.getAllUsers().then(function (users) {
+        console.log(users);
+        vm.allUsersList = users.data;
+
+    });
+
+
+    vm.isUserInRoles = function (roles) {
         var authorizedRoles = [];
         if (!angular.isArray(roles)) {
             authorizedRoles = [roles];

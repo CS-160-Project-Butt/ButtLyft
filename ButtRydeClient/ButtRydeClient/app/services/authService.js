@@ -3,7 +3,6 @@ app.factory('authService', ['$http', '$q', 'ngAuthSettings', 'localStorageServic
 
     //var oauthToken = 'oauth/token';
     var oauthToken = 'Token';
-
     var serviceBase = ngAuthSettings.apiServiceBaseUri;
     var authServiceFactory = {};
 
@@ -18,6 +17,14 @@ app.factory('authService', ['$http', '$q', 'ngAuthSettings', 'localStorageServic
         provider: "",
         userName: "",
         externalAccessToken: ""
+    };
+
+    var _getAllUsers = function getAllUsers() {
+        var deferred = $q.defer();
+        $http.get(serviceBase + 'api/applicationusers/getallusersjson').then(function (results) {
+            deferred.resolve(results.data);
+        });
+        return deferred.promise;
     };
 
     var _getUserRoles = function getUserRoles() {
@@ -162,7 +169,7 @@ app.factory('authService', ['$http', '$q', 'ngAuthSettings', 'localStorageServic
 
     };
 
-
+    authServiceFactory.getAllUsers = _getAllUsers;
     authServiceFactory.getUserRoles = _getUserRoles;
     authServiceFactory.saveRegistration = _saveRegistration;
     authServiceFactory.login = _login;
