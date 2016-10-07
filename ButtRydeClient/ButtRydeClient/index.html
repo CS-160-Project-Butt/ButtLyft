@@ -6,6 +6,7 @@
     <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
 
     <title>Ryde.</title>
+    
     <base href="/">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -43,6 +44,7 @@
                     <li data-ng-hide="!vm.authentication.isAuth"><a href="">Welcome {{vm.authentication.userName}}</a></li>
                     <li class="active"><a href="/">Home</a></li>
                     <li><a href="/userList">User List</a></li>
+                    <li><a href="/userDetails">User Details</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -112,8 +114,13 @@
     <script src="app/controllers/indexCtrl.js"></script>
     <script src="app/controllers/loginCtrl.js"></script>
     <script src="app/controllers/userListCtrl.js"></script>
+    <script src="app/controllers/userDetailsCtrl.js"></script>
 
     <!-- Load filters -->
     <script src="app/filters/tel.js"></script>
+
+    <!-- Import Google API Key and import ngMaps library-->
+    <script src='//maps.googleapis.com/maps/api/js?key=AIzaSyC3bci7j2tYMfRvmvx88oeCw8zbxNp-wMM'></script>
+    <script src="https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/scripts/ng-map.min.js"></script>
 </body>
 </html>

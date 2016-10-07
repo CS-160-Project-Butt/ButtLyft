@@ -1,4 +1,4 @@
-﻿var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'LocalStorageModule']);
+﻿var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngMap', 'ui.bootstrap', 'LocalStorageModule']);
 
 app.config(function ($routeProvider, $locationProvider) {
 
@@ -16,6 +16,12 @@ app.config(function ($routeProvider, $locationProvider) {
         controller: "userListCtrl as vm",
         templateUrl: "/app/views/userList.html"
     });
+
+    $routeProvider.when("/userDetails", {
+        controller: "userDetailsCtrl as vm",
+        templateUrl: "/app/views/userDetails.html"
+    });
+
 
 
     $routeProvider.otherwise({ redirectTo: "/home" });

@@ -71,12 +71,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\controllers\userDetailsCtrl.js" />
     <Content Include="app\controllers\userListCtrl.js" />
     <Content Include="app\filters\tel.js" />
     <Content Include="app\views\applicationUsers.html" />
     <Content Include="app\views\companies.html" />
     <Content Include="app\views\departments.html" />
     <Content Include="app\views\employees.html" />
+    <Content Include="app\views\userDetails.html" />
     <Content Include="app\views\userList.html" />
     <Content Include="app\views\iotgRoadmap.html" />
     <Content Include="content\bootstrap-theme.css" />
@@ -106,6 +108,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <None Include=".bin\bower.cmd" />
+    <None Include=".bin\git.cmd" />
+    <None Include=".bin\node.cmd" />
     <None Include="Properties\PublishProfiles\AASC.Partner.Web.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

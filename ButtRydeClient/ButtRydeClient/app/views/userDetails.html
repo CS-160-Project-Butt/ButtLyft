@@ -1,0 +1,34 @@
+﻿<script type="text/javascript">
+    if (typeof app === 'undefined') {
+        document.location.href = "/";
+    }
+</script>
+<div class="row">
+    <div class="col-md-2">
+        &nbsp;
+    </div>
+    <div class="col-md-4">
+        <h1>All Users Details</h1>
+        <table class="table">
+            <tr ng-repeat="user in vm.allUsersList">
+                <td>
+                    {{user.firstName}}
+                </td>
+                <td>
+                    {{user.lastName}}
+                </td>
+                <td>
+                    {{user.userName}}
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+    <div class="col-md-4">
+
+    </div>
+    <div class="col-md-2">
+        &nbsp;
+    </div>
+</div>
