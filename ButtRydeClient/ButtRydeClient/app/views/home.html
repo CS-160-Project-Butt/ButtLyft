@@ -3,6 +3,9 @@
         document.location.href = "/";
     }
 </script>
+
+
+
 <div class="row">
     <div class="col-md-2">
         &nbsp;
@@ -25,8 +28,19 @@
         &nbsp;
     </div>
     <div class="col-md-8">
-        
-        <ng-map center="[37.3351874,-121.8832602]"></ng-map>
+        <ng-map center="current-location"
+                default-style="false"
+                style="height:500px">
+
+            <marker position="current-location"></marker>   <!-- Client marker -->
+            <marker position="[37.336665, -121.894047]"></marker>   <!-- Test driver marker -->                       
+
+            <directions draggable="false"
+                        travel-mode="DRIVING"
+                        origin="[37.336665, -121.894047]"
+                        destination="current-location">
+            </directions>
+        </ng-map>
     </div>
     <div class="col-md-2">
         &nbsp;
