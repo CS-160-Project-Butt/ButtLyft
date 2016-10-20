@@ -1,6 +1,85 @@
 ﻿'use strict';
-app.controller('homeCtrl', ['$location' ,'authService', function ($location, authService) {
+app.controller('homeCtrl', ['$location', 'authService', 'NgMap', function ($location, authService, NgMap) {
     var vm = this;
+
+    vm.map = null;
+    vm.startAddress = ""
+
+    vm.mapCenter = [0, 0];
+    var geocoder = new google.maps.Geocoder;
+
+
+    //function initMap() {
+    //    var map = new google.maps.Map(document.getElementById('map'), {
+    //        zoom: 6,
+    //        center: { lat: 20.291, lng: 153.027 },
+    //        mapTypeId: 'terrain'
+    //    }).then(function () {
+    //        console.log("maploaded")
+    //    });
+    //}
+
+
+    NgMap.getMap().then(function (map) { //this could be used as an initialize function
+        vm.map = map;
+        console.log(map);
+        console.log('markers', map.markers);
+        console.log('shapes', map.shapes);
+        console.log(geocoder);
+    });
+
+    //var lineSymbol = {
+    //    path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+    //};
+    //var line = new google.maps.Polyline({
+    //    path: [{ lat: 22.291, lng: 153.027 }, { lat: 18.291, lng: 153.027 }],
+    //    icons: [{
+    //        icon: lineSymbol,
+    //        offset: '100%'
+    //    }],
+    //    map: map
+    //});
+
+    vm.reverseGeoCode = function () {
+
+
+    }
+
+    vm.onCenterChanged = function () {
+        //vm.mapCenter = [null,null];
+        if (vm.map != null) {
+            vm.mapCenter[0] = vm.map.getCenter().lat();
+            vm.mapCenter[1] = vm.map.getCenter().lng();
+
+            console.log("hit")
+            console.log(vm.mapCenter);
+            vm.centerMarker = vm.mapCenter;
+        }
+    }
+
+
+    vm.setStartAddress = function (address) {
+        vm.startAddress = address;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     function containsAny(source, target) {
         for (var i = 0; i < target.length; i++) {
             for (var j = 0; j < source.length; j++) {
@@ -11,11 +90,8 @@ app.controller('homeCtrl', ['$location' ,'authService', function ($location, aut
         return false;
     };
 
-
-
     vm.toLogin = function () {
-        if (!authService.authentication.isAuth)
-        {
+        if (!authService.authentication.isAuth) {
             $location.path('/login');
         }
     }
@@ -24,9 +100,6 @@ app.controller('homeCtrl', ['$location' ,'authService', function ($location, aut
     vm.roles = [];
 
     vm.authentication = authService.authentication;
-    
-
-
 
     authService.getUserRoles().then(function (resRoles) {
         vm.roles = resRoles.data;
@@ -38,7 +111,6 @@ app.controller('homeCtrl', ['$location' ,'authService', function ($location, aut
         vm.allUsersList = users.data;
 
     });
-
 
     vm.isUserInRoles = function (roles) {
         var authorizedRoles = [];

@@ -20,30 +20,73 @@
     <div class="col-md-2">
         &nbsp;
     </div>
-    
-</div>
 
+</div>
+<style>
+    #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
+      #floating-panel {
+        position: absolute;
+        top: 5px;
+        left: 50%;
+        margin-left: -180px;
+        width: 350px;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+      }
+</style>
 <div class="row">
     <div class="col-md-2">
         &nbsp;
     </div>
     <div class="col-md-8">
         <ng-map center="current-location"
+                on-center-changed="vm.onCenterChanged()"
                 default-style="false"
                 style="height:500px">
 
-            <marker position="current-location"></marker>   <!-- Client marker -->
-            <marker position="[37.336665, -121.894047]"></marker>   <!-- Test driver marker -->                       
+            <!--<marker position="current-location"></marker>-->   <!-- Client marker -->
+            <marker position="[37.336665, -121.894047]"></marker>   <!-- Test driver marker -->
+            <custom-marker position="{{vm.centerMarker}}" on-click="vm.startMarkerClicked()">
+                <div>
+                    <div id="floating-panel">
+                        <div class="row">
+                            Lat: {{vm.centerMarker[0]}}
+                            Long: {{vm.centerMarker[1]}}
+                        </div>
+                        <div class="row">
+                            <button id="setStart" type="button" ng-click="vm.reverseGeocode(vm.centerMarker[0],vm.centerMarker[1])">
+                                Set Starting Location
+                            </button>
+                        </div>
+                        
+                    </div>
+                    
 
-            <directions draggable="false"
+                </div>
+            </custom-marker>
+            <!--<directions draggable="true"
                         travel-mode="DRIVING"
                         origin="[37.336665, -121.894047]"
                         destination="current-location">
-            </directions>
+            </directions>-->
         </ng-map>
     </div>
     <div class="col-md-2">
         &nbsp;
     </div>
-   
+
 </div>
