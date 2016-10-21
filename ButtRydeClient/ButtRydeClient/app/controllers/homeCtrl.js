@@ -3,10 +3,9 @@ app.controller('homeCtrl', ['$location', 'authService', 'NgMap', function ($loca
     var vm = this;
 
     vm.map = null;
-    vm.startAddress = ""
+    vm.startAddress = [0,0];
 
     vm.mapCenter = [0, 0];
-    var geocoder = new google.maps.Geocoder;
 
 
     //function initMap() {
@@ -22,10 +21,13 @@ app.controller('homeCtrl', ['$location', 'authService', 'NgMap', function ($loca
 
     NgMap.getMap().then(function (map) { //this could be used as an initialize function
         vm.map = map;
+        //vm.startAddress[0] = vm.map.getCenter().lat();
+        //vm.startAddress[1] = vm.map.getCenter().lng();
+        console.log(vm.startAddress);
         console.log(map);
         console.log('markers', map.markers);
         console.log('shapes', map.shapes);
-        console.log(geocoder);
+        vm.onCenterChanged();//initialize center
     });
 
     //var lineSymbol = {
@@ -51,15 +53,15 @@ app.controller('homeCtrl', ['$location', 'authService', 'NgMap', function ($loca
             vm.mapCenter[0] = vm.map.getCenter().lat();
             vm.mapCenter[1] = vm.map.getCenter().lng();
 
-            console.log("hit")
-            console.log(vm.mapCenter);
+            //console.log(vm.mapCenter);
             vm.centerMarker = vm.mapCenter;
         }
     }
 
 
-    vm.setStartAddress = function (address) {
-        vm.startAddress = address;
+    vm.setStartAddress = function () {
+        //vm.startAddress = lat + lng;
+        console.log("your starting address is" + vm.mapCenter);
     }
 
 

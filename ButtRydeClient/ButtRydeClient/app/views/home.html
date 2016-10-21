@@ -3,7 +3,26 @@
         document.location.href = "/";
     }
 </script>
-
+<style>
+    #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+        top: 5px;
+        left: 50%;
+        margin-left: -100px;
+        margin-top: -150px;
+        width: 200px;
+        padding: 5px;
+        border: 1px solid #999;
+    }
+</style>
 
 
 <div class="row">
@@ -22,32 +41,7 @@
     </div>
 
 </div>
-<style>
-    #floating-panel {
-        position: absolute;
-        top: 10px;
-        left: 25%;
-        z-index: 5;
-        background-color: #fff;
-        padding: 5px;
-        border: 1px solid #999;
-        text-align: center;
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-      }
-      #floating-panel {
-        position: absolute;
-        top: 5px;
-        left: 50%;
-        margin-left: -180px;
-        width: 350px;
-        z-index: 5;
-        background-color: #fff;
-        padding: 5px;
-        border: 1px solid #999;
-      }
-</style>
+
 <div class="row">
     <div class="col-md-2">
         &nbsp;
@@ -67,14 +61,17 @@
                             Lat: {{vm.centerMarker[0]}}
                             Long: {{vm.centerMarker[1]}}
                         </div>
+                        <div class="row"><input type="text" name="inputStartingLocation"></div>
                         <div class="row">
-                            <button id="setStart" type="button" ng-click="vm.reverseGeocode(vm.centerMarker[0],vm.centerMarker[1])">
+                            <button id="setStart"
+                                    type="button"
+                                    ng-click="vm.setStartAddress()">
                                 Set Starting Location
                             </button>
                         </div>
-                        
+
                     </div>
-                    
+
 
                 </div>
             </custom-marker>
