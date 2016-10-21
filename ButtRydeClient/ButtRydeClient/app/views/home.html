@@ -16,9 +16,9 @@
         padding-left: 10px;
         top: 5px;
         left: 50%;
-        margin-left: -100px;
+        margin-left: -75px;
         margin-top: -150px;
-        width: 200px;
+        width: 150px;
         padding: 5px;
         border: 1px solid #999;
     }
@@ -54,6 +54,7 @@
 
             <!--<marker position="current-location"></marker>-->   <!-- Client marker -->
             <marker position="[37.336665, -121.894047]"></marker>   <!-- Test driver marker -->
+            {{vm.inputAddress}}
             <custom-marker position="{{vm.centerMarker}}" on-click="vm.startMarkerClicked()">
                 <div>
                     <div id="floating-panel">
@@ -61,7 +62,7 @@
                             Lat: {{vm.centerMarker[0]}}
                             Long: {{vm.centerMarker[1]}}
                         </div>
-                        <div class="row"><input type="text" name="inputStartingLocation"></div>
+                        <div class="row"><input type="text" name="inputStartingLocation" ng-model="vm.inputAddress"></div>
                         <div class="row">
                             <button id="setStart"
                                     type="button"
