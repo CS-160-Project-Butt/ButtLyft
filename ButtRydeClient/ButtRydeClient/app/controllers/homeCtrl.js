@@ -1,12 +1,28 @@
 ﻿'use strict';
-app.controller('homeCtrl', ['$location', 'authService', 'NgMap', function ($location, authService, NgMap) {
+app.controller('homeCtrl', ['$timeout','$location', 'authService', 'NgMap', function ($timeout,$location, authService, NgMap) {
     var vm = this;
 
     vm.map = null;
-    vm.startAddress = [0,0];
+    vm.startAddress = [0, 0];
     vm.inputAddress = null;
     vm.mapCenter = [0, 0];
+    vm.dragging = false;
 
+    vm.processLocation = function (location) {
+        if (vm.mapCenter[0] == 0 && vm.mapCenter[1] == 0) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                vm.mapCenter[0] = position.coords.latitude;
+                vm.mapCenter[1] = position.coords.longitude;
+            }, function (err) { });
+        }
+        if (location != null) {
+            vm.mapCenter = vm.inputAddress;
+            console.log(vm.mapCenter)
+            vm.inputAddress = null;
+            vm.onCenterChanged(vm.mapCenter);
+        }
+        return vm.mapCenter;
+    }
 
     NgMap.getMap().then(function (map) { //this could be used as an initialize function
         vm.map = map;
@@ -19,37 +35,22 @@ app.controller('homeCtrl', ['$location', 'authService', 'NgMap', function ($loca
         vm.onCenterChanged();//initialize center
     });
 
-    //var lineSymbol = {
-    //    path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
-    //};
-    //var line = new google.maps.Polyline({
-    //    path: [{ lat: 22.291, lng: 153.027 }, { lat: 18.291, lng: 153.027 }],
-    //    icons: [{
-    //        icon: lineSymbol,
-    //        offset: '100%'
-    //    }],
-    //    map: map
-    //});
-
-    vm.reverseGeoCode = function () {
-
-
+    vm.onDragEnd = function () {
+        vm.dragging = false;
     }
-
-    vm.onCenterChanged = function () {
-        //vm.mapCenter = [null,null];
+    vm.onCenterChanged = function (center) {
+        vm.dragging = true;
         if (vm.map != null) {
-            vm.mapCenter[0] = vm.map.getCenter().lat();
-            vm.mapCenter[1] = vm.map.getCenter().lng();
-
-            //console.log(vm.mapCenter);
-            vm.centerMarker = vm.mapCenter;
+            var temp = [0, 0];
+            temp[0] = vm.map.getCenter().lat();
+            temp[1] = vm.map.getCenter().lng();
+            if (center != null) temp = center
+            vm.centerMarker = temp;
         }
     }
 
-
     vm.setStartAddress = function () {
-        //vm.startAddress = lat + lng;
+        vm.startAddress = vm.mapCenter;
         console.log("your starting address is" + vm.mapCenter);
     }
 
