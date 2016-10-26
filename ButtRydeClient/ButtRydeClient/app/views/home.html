@@ -49,7 +49,7 @@
     <div class="col-md-8">
         <ng-map center="{{vm.processLocation()}}"
                 zoom="17"
-                on-drag="vm.onCenterChanged()"
+                on-bounds_changed="vm.onCenterChanged()"
                 on-idle="vm.onDragEnd()"
                 default-style="false"
                 style="height:500px">
@@ -59,9 +59,11 @@
             <marker position="[37.336665, -121.894047]"></marker>   <!-- Test driver marker -->
 
             <marker position="{{vm.centerMarker}}"></marker>
+            <div> <marker position="{{vm.startAddress}}"></marker></div>
+           
 
                 <custom-marker position="{{vm.centerMarker}}" on-click="vm.startMarkerClicked()">
-
+                    
                     <div data-ng-hide="vm.dragging">
                         <div id="floating-panel">
                             <div class="row">

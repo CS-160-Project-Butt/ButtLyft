@@ -30,12 +30,14 @@ app.controller('homeCtrl', ['$timeout','$location', 'authService', 'NgMap', func
             navigator.geolocation.getCurrentPosition(function (position) {
                 vm.mapCenter[0] = position.coords.latitude;
                 vm.mapCenter[1] = position.coords.longitude;
+
+                vm.onCenterChanged();
             }, function (err) { });
         }
         if (location != null) {
             vm.mapCenter = vm.inputAddress;
-            console.log(vm.mapCenter)
             vm.inputAddress = null;
+
             vm.onCenterChanged(vm.mapCenter);
         }
         return vm.mapCenter;
@@ -68,7 +70,7 @@ app.controller('homeCtrl', ['$timeout','$location', 'authService', 'NgMap', func
      * once we figure out where we want to get picked up from we click the button and the button calls this and does things
      */
     vm.setStartAddress = function () {
-        vm.startAddress = vm.mapCenter;
+        vm.startAddress = angular.copy(vm.centerMarker);
         console.log("your starting address is" + vm.mapCenter);
     }
 
