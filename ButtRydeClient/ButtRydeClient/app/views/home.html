@@ -17,7 +17,7 @@
         top: 5px;
         left: 50%;
         margin-left: -75px;
-        margin-top: -150px;
+        margin-top: -100px;
         width: 150px;
         padding: 5px;
         border: 1px solid #999;
@@ -54,7 +54,12 @@
                 default-style="false"
                 style="height:500px">
             <input type="text" ng-model="vm.inputAddress" ng-keypress="($event.charCode==13)? vm.processLocation(vm.inputAddress) : return"/>
+
             <button ng-click="vm.processLocation(vm.inputAddress);">Search</button>
+            Lat: {{vm.centerMarker[0]}}
+            Long: {{vm.centerMarker[1]}}
+
+
             <!--<marker position="current-location"></marker>-->   <!-- Client marker -->
             <marker position="[37.336665, -121.894047]"></marker>   <!-- Test driver marker -->
 
@@ -66,13 +71,7 @@
                     
                     <div data-ng-hide="vm.dragging">
                         <div id="floating-panel">
-                            <div class="row">
-                                Lat: {{vm.centerMarker[0]}}
-                                Long: {{vm.centerMarker[1]}}
-                            </div>
-                            <div class="row">
-                                <input type="text" name="inputStartingLocation" ng-model="vm.inputAddress">
-                            </div>
+                            
                             <div class="row">
                                 <button id="setStart"
                                         ng-click="vm.setStartAddress()">
