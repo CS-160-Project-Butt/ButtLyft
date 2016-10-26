@@ -54,7 +54,9 @@
                 default-style="false"
                 style="height:500px">
             <input type="text" ng-model="vm.inputAddress" ng-keypress="($event.charCode==13)? vm.processLocation(vm.inputAddress) : return" />
-
+            <br />
+            Directions path length:{{(vm.map.directionsRenderers[0].directions.routes[0].overview_path.length != null)?vm.map.directionsRenderers[0].directions.routes[0].overview_path.length * 0.1:null}} km
+            <br />
             <button ng-click="vm.processLocation(vm.inputAddress);">Search</button>
             Lat: {{vm.centerMarker[0]}}
             Long: {{vm.centerMarker[1]}}
