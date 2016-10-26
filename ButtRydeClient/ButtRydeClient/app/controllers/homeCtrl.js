@@ -71,7 +71,11 @@ app.controller('homeCtrl', ['$timeout','$location', 'authService', 'NgMap', func
      */
     vm.setStartAddress = function () {
         vm.startAddress = angular.copy(vm.centerMarker);
-        console.log("your starting address is" + vm.mapCenter);
+        console.log("your starting address is" + vm.centerMarker);
+    }
+    vm.setEndAddress = function () {
+        vm.endAddress = angular.copy(vm.centerMarker);
+        console.log("your ending address is" + vm.centerMarker);
     }
 
 

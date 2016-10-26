@@ -53,34 +53,43 @@
                 on-idle="vm.onDragEnd()"
                 default-style="false"
                 style="height:500px">
-            <input type="text" ng-model="vm.inputAddress" ng-keypress="($event.charCode==13)? vm.processLocation(vm.inputAddress) : return"/>
+            <input type="text" ng-model="vm.inputAddress" ng-keypress="($event.charCode==13)? vm.processLocation(vm.inputAddress) : return" />
 
             <button ng-click="vm.processLocation(vm.inputAddress);">Search</button>
             Lat: {{vm.centerMarker[0]}}
             Long: {{vm.centerMarker[1]}}
-
+            <directions draggable="true"
+                        panel="directions-panel"
+                        travel-mode="DRIVING"
+                        origin={{vm.startAddress}}
+                        destination={{vm.endAddress}}>
+            </directions>
 
             <!--<marker position="current-location"></marker>-->   <!-- Client marker -->
             <marker position="[37.336665, -121.894047]"></marker>   <!-- Test driver marker -->
 
             <marker position="{{vm.centerMarker}}"></marker>
             <div> <marker position="{{vm.startAddress}}"></marker></div>
-           
+            <div> <marker position="{{vm.endAddress}}"></marker></div>
 
-                <custom-marker position="{{vm.centerMarker}}" on-click="vm.startMarkerClicked()">
-                    
-                    <div data-ng-hide="vm.dragging">
-                        <div id="floating-panel">
-                            
-                            <div class="row">
-                                <button id="setStart"
-                                        ng-click="vm.setStartAddress()">
-                                    Set Pickup Location
-                                </button>
-                            </div>
+
+            <custom-marker position="{{vm.centerMarker}}" on-click="vm.startMarkerClicked()">
+                <div data-ng-hide="vm.dragging">
+                    <div id="floating-panel">
+
+                        <div class="row">
+                            <button id="setStart"
+                                    ng-click="vm.setStartAddress()">
+                                Set Pickup Location
+                            </button>
+                            <button id="setStart"
+                                    ng-click="vm.setEndAddress()">
+                                Set Dropoff Location
+                            </button>
                         </div>
                     </div>
-                </custom-marker>
+                </div>
+            </custom-marker>
 
         </ng-map>
     </div>
