@@ -1,21 +1,27 @@
 ﻿'use strict';
 app.factory('signalService', ['$', function ($) {
 
+    var connection = null;
     var hub = null;
-    var proxy;
-    var connection;
 
     return {
         initialize: function () {
-            connection = $.hubConnection();
+            connection = $.hubConnection('http://localhost:1272/');
 
-            this.hub = connection.createHubProxy('dataHub');
-
-            this.hub.on('onHit', function (data) {
+            hub = connection.createHubProxy('dataHub');
+            connection.start();
+            hub.on('onHit', function (data) {
                 console.log(data);
             })
 
+        },
+        hit: function () {
+                hub.invoke('hit');
+       
         }
+    //    addNote: function (note) { //invoking a method with data
+    //    hub.invoke('addNote', note);
+    //},
     }
 
 

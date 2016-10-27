@@ -82,7 +82,9 @@ app.controller('homeCtrl', ['$timeout', '$location', 'authService', 'signalServi
 
     signalService.initialize();
 
-
+    vm.triggerCounter = function(){
+        signalService.hit();
+    }
 
 
 

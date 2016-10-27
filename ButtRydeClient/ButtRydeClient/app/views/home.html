@@ -58,6 +58,8 @@
             Directions path length:{{(vm.map.directionsRenderers[0].directions.routes[0].overview_path.length != null)?vm.map.directionsRenderers[0].directions.routes[0].overview_path.length * 0.1:null}} km
             <br />
             <button ng-click="vm.processLocation(vm.inputAddress);">Search</button>
+
+            <button ng-click="vm.triggerCounter();">Trigger</button>
             Lat: {{vm.centerMarker[0]}}
             Long: {{vm.centerMarker[1]}}
             <directions draggable="true"
