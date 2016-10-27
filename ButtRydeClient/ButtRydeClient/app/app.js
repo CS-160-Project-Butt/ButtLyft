@@ -32,15 +32,15 @@ app.config(function ($routeProvider, $locationProvider) {
 
 });
 
-//var serviceBase = 'http://localhost:51423/';
-//dev
-//var serviceBase = 'http://localhost:50918/';
 var serviceBase = 'http://localhost:1272/';
+//var serviceBase = 'http://rydeserver.azurewebsites.net/';
 
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
     clientId: 'ngAuthApp'
 });
+
+app.value('$', $);
 
 app.config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');

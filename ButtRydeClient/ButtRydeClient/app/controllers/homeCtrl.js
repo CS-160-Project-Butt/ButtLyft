@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('homeCtrl', ['$timeout','$location', 'authService', 'NgMap', function ($timeout,$location, authService, NgMap) {
+app.controller('homeCtrl', ['$timeout', '$location', 'authService', 'signalService', 'NgMap', function ($timeout, $location, authService, signalService, NgMap) {
     var vm = this;
 
     vm.map = null; //this is the object that ngmap gives us
@@ -15,7 +15,9 @@ app.controller('homeCtrl', ['$timeout','$location', 'authService', 'NgMap', func
         console.log(map); //checking out the map
         console.log('markers', map.markers);
         console.log('shapes', map.shapes);
+        vm.processLocation();
         vm.onCenterChanged();//initialize the position of the center marker
+        vm.onDragEnd();
     });
 
     /**
@@ -78,7 +80,7 @@ app.controller('homeCtrl', ['$timeout','$location', 'authService', 'NgMap', func
         console.log("your ending address is" + vm.centerMarker);
     }
 
-
+    signalService.initialize();
 
 
 

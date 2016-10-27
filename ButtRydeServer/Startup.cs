@@ -40,6 +40,8 @@ namespace AASC.Partner.API
             app.UseAutofacWebApi(httpConfig);
 
             app.UseWebApi(httpConfig);
+
+            app.MapSignalR();
         }
 
         private void ConfigAutofacIoC(HttpConfiguration httpConfig)
