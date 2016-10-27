@@ -17,6 +17,9 @@ namespace AASC.Partner.API.Hubs
             _count += 1;
             this.Clients.All.onHit(_count);
         }
+        public void sendMessage(string message) {
+            this.Clients.All.currentMessage(message);
+        }
     }
 	
 }

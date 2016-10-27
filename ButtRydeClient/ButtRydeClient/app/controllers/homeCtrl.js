@@ -2,6 +2,7 @@
 app.controller('homeCtrl', ['$timeout', '$location', 'authService', 'signalService', 'NgMap', function ($timeout, $location, authService, signalService, NgMap) {
     var vm = this;
 
+    signalService.initialize(); //inits the signalservice factory
     vm.map = null; //this is the object that ngmap gives us
     vm.startAddress = [0, 0]; //this is used to store the location of the rider's pickup point
     vm.endAddress = [0, 0]; // this is the location of the rider's destination
@@ -80,12 +81,14 @@ app.controller('homeCtrl', ['$timeout', '$location', 'authService', 'signalServi
         console.log("your ending address is" + vm.centerMarker);
     }
 
-    signalService.initialize();
-
     vm.triggerCounter = function(){
         signalService.hit();
     }
 
+    vm.currentMessage;
+    vm.sendMessage = function (message) {
+        signalService.sendMessage(message);
+    }
 
 
 
