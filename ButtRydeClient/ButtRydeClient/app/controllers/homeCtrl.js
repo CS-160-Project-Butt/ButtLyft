@@ -3,7 +3,6 @@ app.controller('homeCtrl', ['$timeout', '$location', 'authService', 'signalServi
     var vm = this;
 
     signalService.initialize(); //inits the signalservice factory
-    vm.map = null; //this is the object that ngmap gives us
     vm.startAddress = [0, 0]; //this is used to store the location of the rider's pickup point
     vm.endAddress = [0, 0]; // this is the location of the rider's destination
     vm.inputAddress = null; //user types in the textbox and queries where to go, then hits enter or presses search
