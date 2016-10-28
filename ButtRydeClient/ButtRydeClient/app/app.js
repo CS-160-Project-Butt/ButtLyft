@@ -7,6 +7,11 @@ app.config(function ($routeProvider, $locationProvider) {
         templateUrl: "/app/views/home.html"
     });
 
+    $routeProvider.when("/driver", {
+        controller: "driverCtrl as vm",
+        templateUrl: "/app/views/driver.html"
+    });
+
     $routeProvider.when("/login", {
         controller: "loginCtrl as vm",
         templateUrl: "/app/views/login.html"

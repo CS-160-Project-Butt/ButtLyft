@@ -71,10 +71,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\controllers\driverCtrl.js" />
     <Content Include="app\controllers\userDetailsCtrl.js" />
     <Content Include="app\controllers\userListCtrl.js" />
     <Content Include="app\filters\tel.js" />
     <Content Include="app\services\signalService.js" />
+    <Content Include="app\views\driver.html" />
     <Content Include="app\views\userDetails.html" />
     <Content Include="app\views\userList.html" />
     <Content Include="content\bootstrap-theme.css" />
