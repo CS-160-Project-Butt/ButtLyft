@@ -20,6 +20,14 @@ namespace AASC.Partner.API.Hubs
         public void sendMessage(string message) {
             this.Clients.All.currentMessage(message);
         }
+
+        public void sendLocation(string driverUsername, double x, double y)
+        {
+            this.Clients.Others.currentLocation(driverUsername, x, y);
+        }
+
     }
-	
+
+
+    }
 }

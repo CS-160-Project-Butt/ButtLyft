@@ -13,7 +13,7 @@ app.factory('driverSignalService', ['$', function ($) {
             hub.on('onHit', function (data) {
                 console.log(data);
             })
-            hub.on('currentMessage', function(data){
+            hub.on('currentLocation', function(data){
                 console.log(data);
             })
 
@@ -21,8 +21,8 @@ app.factory('driverSignalService', ['$', function ($) {
         hit: function () {
             hub.invoke('hit');
         },
-        sendMessage: function(message){
-            hub.invoke('sendMessage', message);
+        sendLocation: function(){
+            hub.invoke('sendLocation');
         }
     //    addNote: function (note) { //invoking a method with data
     //    hub.invoke('addNote', note);

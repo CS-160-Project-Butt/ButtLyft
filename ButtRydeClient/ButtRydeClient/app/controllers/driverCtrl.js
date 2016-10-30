@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('driverCtrl', ['$timeout', '$location', 'authService', 'signalService', 'NgMap', function ($timeout, $location, authService, driverSignalService, NgMap) {
+app.controller('driverCtrl', ['$timeout', '$location', 'authService', 'driverSignalService', 'NgMap', function ($timeout, $location, authService, driverSignalService, NgMap) {
     var vm = this;
 
     signalService.initialize(); //inits the signalservice factory
@@ -84,10 +84,15 @@ app.controller('driverCtrl', ['$timeout', '$location', 'authService', 'signalSer
         driverSignalService.hit();
     }
 
-    vm.currentMessage;
-    vm.sendMessage = function (message) {
-        driverSignalService.sendMessage(message);
+    /**
+    * Get the current location of the driver and broadcast it to all the riders.
+    */
+    vm.currentLocation;
+    vm.sendLocation = function () {
+        driverSignalService.sendLocation(vm.mapCenter);
     }
+
+
 
 
 
