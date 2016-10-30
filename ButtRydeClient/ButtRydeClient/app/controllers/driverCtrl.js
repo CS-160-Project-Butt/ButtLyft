@@ -3,7 +3,6 @@ app.controller('driverCtrl', ['$timeout', '$location', 'authService', 'signalSer
     var vm = this;
 
     signalService.initialize(); //inits the signalservice factory
-    vm.map = null; //this is the object that ngmap gives us
     vm.startAddress = [0, 0]; //this is used to store the location of the rider's pickup point
     vm.endAddress = [0, 0]; // this is the location of the rider's destination
     vm.inputAddress = null; //user types in the textbox and queries where to go, then hits enter or presses search
@@ -81,13 +80,13 @@ app.controller('driverCtrl', ['$timeout', '$location', 'authService', 'signalSer
         console.log("your ending address is" + vm.centerMarker);
     }
 
-    vm.triggerCounter = function(){
-        signalService.hit();
+    vm.triggerCounter = function () {
+        driverSignalService.hit();
     }
 
     vm.currentMessage;
     vm.sendMessage = function (message) {
-        signalService.sendMessage(message);
+        driverSignalService.sendMessage(message);
     }
 
 
