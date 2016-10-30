@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('driverCtrl', ['$timeout', '$location', 'authService', 'signalService', 'NgMap', function ($timeout, $location, authService, signalService, NgMap) {
+app.controller('driverCtrl', ['$timeout', '$location', 'authService', 'signalService', 'NgMap', function ($timeout, $location, authService, driverSignalService, NgMap) {
     var vm = this;
 
     signalService.initialize(); //inits the signalservice factory
