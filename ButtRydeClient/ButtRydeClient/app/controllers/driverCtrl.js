@@ -85,12 +85,12 @@ app.controller('driverCtrl', ['$timeout', '$location', 'authService', 'driverSig
     }
 
     /**
-    * Get the current location of the driver and broadcast it to all the riders.
+    * Get the current location of the driver and broadcast it to all the riders every three seconds.
     */
     vm.currentLocation;
-    vm.sendLocation = function () {
+    vm.sendLocation = $timeout (function () {
         driverSignalService.sendLocation(vm.mapCenter);
-    }
+    }, 3000);
 
 
 
