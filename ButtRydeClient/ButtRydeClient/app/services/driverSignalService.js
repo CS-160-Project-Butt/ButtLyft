@@ -27,7 +27,6 @@ app.factory('driverSignalService', ['authService','$', function (authService, $)
             hub.invoke('sendLocation');
         },
         broadcastLocation: function (geocoords) {
-            console.log(driverUser + " " + geocoords);
             hub.invoke('driverBroadcastLocation', driverUser, angular.toJson(geocoords));
         }
     //    addNote: function (note) { //invoking a method with data

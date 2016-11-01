@@ -36,7 +36,6 @@ app.factory('signalService', ['$', function ($) {
                     drivers.push(temp);
                 }
 
-                console.log(drivers)
             });
         },
         setCurrentUser: function (user) {
