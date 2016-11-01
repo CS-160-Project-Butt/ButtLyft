@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('homeCtrl', ['$timeout', '$location', 'authService', 'signalService', 'NgMap', function ($timeout, $location, authService, signalService, NgMap) {
+app.controller('homeCtrl', ['$scope', '$interval', '$timeout', '$location', 'authService', 'signalService', 'NgMap', function ($scope, $interval, $timeout, $location, authService, signalService, NgMap) {
     var vm = this;
 
     signalService.initialize(); //inits the signalservice factory
@@ -8,9 +8,13 @@ app.controller('homeCtrl', ['$timeout', '$location', 'authService', 'signalServi
     vm.inputAddress = null; //user types in the textbox and queries where to go, then hits enter or presses search
     vm.mapCenter = [0, 0]; //position of the center of the map.
     vm.dragging = false; //bool: if user is done dragging the map, expand the marker
+    vm.drivers = {};
 
     NgMap.getMap().then(function (map) { //this could be used as an initialize function
-        vm.map = map; //we get the map
+        if (vm.map == null) {
+            console.log("mapisnull")
+            vm.map = map; //we get the map
+        }
         console.log(vm.startAddress);
         console.log(map); //checking out the map
         console.log('markers', map.markers);
@@ -18,6 +22,7 @@ app.controller('homeCtrl', ['$timeout', '$location', 'authService', 'signalServi
         vm.processLocation();
         vm.onCenterChanged();//initialize the position of the center marker
         vm.onDragEnd();
+
     });
 
     /**
@@ -88,6 +93,32 @@ app.controller('homeCtrl', ['$timeout', '$location', 'authService', 'signalServi
     vm.sendMessage = function (message) {
         signalService.sendMessage(message);
     }
+
+
+
+    vm.stop;
+    vm.signalInterval = function () {
+        // Don't start a new fight if we are already fighting
+        if (angular.isDefined(vm.stop)) return;
+
+        vm.stop = $interval(function () {
+            console.log(vm.centerMarker)
+            vm.drivers = signalService.getDrivers();
+        }, 100);
+    };
+    vm.signalInterval();
+
+    vm.stopInterval = function () {
+        if (angular.isDefined(stop)) {
+            $interval.cancel(stop);
+            stop = undefined;
+        }
+    };
+
+    $scope.$on('$destroy', function () {
+        // Make sure that the interval is destroyed too
+        vm.stopInterval();
+    });
 
 
 

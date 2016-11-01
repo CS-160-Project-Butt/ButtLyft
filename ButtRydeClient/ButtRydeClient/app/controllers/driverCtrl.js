@@ -1,8 +1,8 @@
 ﻿'use strict';
-app.controller('driverCtrl', ['$timeout', '$location', 'authService', 'driverSignalService', 'NgMap', function ($timeout, $location, authService, driverSignalService, NgMap) {
+app.controller('driverCtrl', ['$scope', '$interval', '$timeout', '$location', 'authService', 'driverSignalService', 'NgMap', function ($scope, $interval, $timeout, $location, authService, driverSignalService, NgMap) {
     var vm = this;
 
-    signalService.initialize(); //inits the signalservice factory
+    driverSignalService.initialize(); //inits the signalservice factory
     vm.startAddress = [0, 0]; //this is used to store the location of the rider's pickup point
     vm.endAddress = [0, 0]; // this is the location of the rider's destination
     vm.inputAddress = null; //user types in the textbox and queries where to go, then hits enter or presses search
@@ -10,7 +10,10 @@ app.controller('driverCtrl', ['$timeout', '$location', 'authService', 'driverSig
     vm.dragging = false; //bool: if user is done dragging the map, expand the marker
 
     NgMap.getMap().then(function (map) { //this could be used as an initialize function
-        vm.map = map; //we get the map
+        if (vm.map == null) {
+            console.log("mapisnull")
+            vm.map = map; //we get the map
+        }
         console.log(vm.startAddress);
         console.log(map); //checking out the map
         console.log('markers', map.markers);
@@ -18,7 +21,11 @@ app.controller('driverCtrl', ['$timeout', '$location', 'authService', 'driverSig
         vm.processLocation();
         vm.onCenterChanged();//initialize the position of the center marker
         vm.onDragEnd();
+        console.log(vm.authentication.userName)
     });
+
+
+
 
     /**
      * Used by the html map to alter/update the map location
@@ -88,12 +95,38 @@ app.controller('driverCtrl', ['$timeout', '$location', 'authService', 'driverSig
     * Get the current location of the driver and broadcast it to all the riders every three seconds.
     */
     vm.currentLocation;
-    vm.sendLocation = $timeout (function () {
-        driverSignalService.sendLocation(vm.mapCenter);
-    }, 3000);
 
+    //vm.sendLocation = $timeout(function () {
+    //    console.log(vm.mapCenter)
+    //    signalService.sendLocation(vm.mapCenter);
+    //    vm.sendLocation = $timeout(vm.sendLocationLambda, 3000)
+    //}, 3000);
 
+    //vm.sendLocationLambda = 
 
+    vm.stop;
+    vm.signalInterval = function() {
+        // Don't start a new fight if we are already fighting
+        if ( angular.isDefined(vm.stop) ) return;
+
+        vm.stop = $interval(function () {
+            console.log(vm.centerMarker)
+            driverSignalService.broadcastLocation(vm.centerMarker);
+        }, 100);
+    };
+    vm.signalInterval();
+
+    vm.stopInterval = function() {
+        if (angular.isDefined(stop)) {
+            $interval.cancel(stop);
+            stop = undefined;
+        }
+    };
+
+    $scope.$on('$destroy', function() {
+        // Make sure that the interval is destroyed too
+        vm.stopInterval();
+    });
 
 
 

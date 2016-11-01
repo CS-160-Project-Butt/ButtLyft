@@ -71,7 +71,7 @@
             <marker position="{{vm.centerMarker}}"></marker>
             <div> <marker position="{{vm.startAddress}}"></marker></div>
             <div> <marker position="{{vm.endAddress}}"></marker></div>
-
+            <div> <marker ng-repeat="m in vm.drivers" position="{{m.location}}"></marker></div>
 
             <custom-marker position="{{vm.centerMarker}}" on-click="vm.startMarkerClicked()">
                 <div data-ng-hide="vm.dragging">

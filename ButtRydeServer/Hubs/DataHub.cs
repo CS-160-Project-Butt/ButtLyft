@@ -23,28 +23,28 @@ namespace AASC.Partner.API.Hubs
 
 
         // Driver broadcasts a message to all other riders and drivers with its location every 3 second
-        public void sendLocation(string driverUsername, double [] geocoords)
+        public void driverBroadcastLocation(string driverUsername, string geocoords)
         {
-            this.Clients.Others.currentLocation(driverUsername, geocoords);
+            this.Clients.Others.receiveLocation(driverUsername, geocoords);
         }
 
 
         // Driver broadcasts its location to rider every 3 second
-        public void sendLocation(string driverUsername, double[] geocoords, string riderUsername)
+        public void sendLocation(string driverUsername, string geocoords, string riderUsername)
         {
             this.Clients.Others.currentLocation(driverUsername, geocoords, riderUsername);
         }
 
 
-        // Rider receives all driver locations, puts it into an array, and displays all drivers on the map
-        public void receiveLocation(string driverUsername, double [] geocoords)
+        // Rider receives all driver location displays all drivers on the map
+        public void receiveLocation(string driverUsername, string geocoords)
         {
             this.Clients.Others.receiveLocation(driverUsername, geocoords);
         }
 
 
         // Rider displays driver on map
-        public void receiveLocation(string driverUsername, double[] geocoords, string riderUsername)
+        public void receiveLocation(string driverUsername, string geocoords, string riderUsername)
         {
             this.Clients.Others.receiveLocation(driverUsername, geocoords, riderUsername);
         }
