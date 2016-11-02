@@ -11,6 +11,9 @@ app.controller('homeCtrl', ['$scope', '$interval', '$timeout', '$location', 'aut
     vm.drivers = {};
 
     NgMap.getMap().then(function (map) { //this could be used as an initialize function
+
+
+        vm.processLocation();
         if (vm.map == null) {
             console.log("mapisnull")
             vm.map = map; //we get the map
@@ -19,7 +22,7 @@ app.controller('homeCtrl', ['$scope', '$interval', '$timeout', '$location', 'aut
         console.log(map); //checking out the map
         console.log('markers', map.markers);
         console.log('shapes', map.shapes);
-        vm.processLocation();
+
         vm.onCenterChanged();//initialize the position of the center marker
         vm.onDragEnd();
 
