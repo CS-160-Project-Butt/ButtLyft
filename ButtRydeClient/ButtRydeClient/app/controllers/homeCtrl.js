@@ -102,7 +102,6 @@ app.controller('homeCtrl', ['$scope', '$interval', '$timeout', '$location', 'aut
         if (angular.isDefined(vm.stop)) return;
 
         vm.stop = $interval(function () {
-            console.log(vm.centerMarker)
             vm.drivers = signalService.getDrivers();
         }, 100);
     };

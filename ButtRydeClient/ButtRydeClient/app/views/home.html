@@ -24,43 +24,24 @@
     }
 </style>
 
-
 <div class="row">
-    <div class="col-md-2">
-        &nbsp;
-    </div>
-    <div class="col-md-4">
-        <h1>Dashboard</h1>
+    <div class="col-md-3">
+        <div class="input-group">
+            <input type="text" ng-model="vm.inputAddress" ng-keypress="($event.charCode==13)? vm.processLocation(vm.inputAddress) : return" class="form-control" placeholder="Type a Location">
+            <span class="input-group-btn">
+                <button class="btn btn-default" ng-click="vm.processLocation(vm.inputAddress);" type="button">Go!</button>
+            </span>
+        </div>
 
     </div>
-    <div class="col-md-4">
-
-    </div>
-    <div class="col-md-2">
-        &nbsp;
-    </div>
-
-</div>
-
-<div class="row">
-    <div class="col-md-2">
-        &nbsp;
-    </div>
-    <div class="col-md-8">
+    <div class="col-md-9">
         <ng-map center="{{vm.processLocation()}}"
                 zoom="17"
                 on-bounds_changed="vm.onCenterChanged()"
                 on-idle="vm.onDragEnd()"
                 default-style="false"
                 style="height:500px">
-            <input type="text" ng-model="vm.inputAddress" ng-keypress="($event.charCode==13)? vm.processLocation(vm.inputAddress) : return" />
-            <br />
-            Directions path length:{{(vm.map.directionsRenderers[0].directions.routes[0].overview_path.length != null)?vm.map.directionsRenderers[0].directions.routes[0].overview_path.length * 0.1:null}} km
-            <br />
-            <button ng-click="vm.processLocation(vm.inputAddress);">Search</button>
 
-            Lat: {{vm.centerMarker[0]}}
-            Long: {{vm.centerMarker[1]}}
             <directions draggable="true"
                         panel="directions-panel"
                         travel-mode="DRIVING"
@@ -96,22 +77,13 @@
 
 </div>
 <div class="row">
-    <div class="col-md-2">
-        &nbsp;
-    </div>
-    <div class="col-md-4">
+    Route length: {{(vm.map.directionsRenderers[0].directions.routes[0].overview_path.length != null)?vm.map.directionsRenderers[0].directions.routes[0].overview_path.length * 0.1:null}} km
+    <br />
+    
+    Lat: {{vm.centerMarker[0]}}<br />
+    Long: {{vm.centerMarker[1]}}
 
-        <br /><br /><br /><br />
 
-        <button ng-click="vm.triggerCounter()">Trigger</button>
-        <button ng-click="vm.sendMessage('Hello World')">Say Hello</button>
 
-    </div>
-    <div class="col-md-4">
-
-    </div>
-    <div class="col-md-2">
-        &nbsp;
-    </div>
 
 </div>

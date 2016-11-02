@@ -9,7 +9,7 @@
     
     <base href="/">
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css">
 
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-2.2.1.min.js"></script>
@@ -21,13 +21,9 @@
 
     <link href="content/css/loading-bar.css" rel="stylesheet" />
     <link href="content/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="content/css/social-buttons.css" rel="stylesheet" />
-    <link href="content/css/dialogs.css" rel="stylesheet" />
-    <link href="content/css/modal.css" rel="stylesheet" />
-    <link href="content/css/bootstrap-additions.css" rel="stylesheet" />
 
-    <link href="content/css/bootstrap.css" rel="stylesheet" />
 
+    <link href="content/css/login.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body ng-cloak ng-app="app" data-ng-controller="indexCtrl as vm">
@@ -44,7 +40,7 @@
             <div class="navbar-collapse collapse" ng-cloak>
                 <ul class="nav navbar-nav navbar-right">
                     <li data-ng-hide="!vm.authentication.isAuth"><a href="">Welcome {{vm.authentication.userName}}</a></li>
-                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="/home">Home</a></li>
                     <li><a href="/userList">User List</a></li>
                     <li><a href="/userDetails">User Details</a></li>
                     <li class="dropdown">
