@@ -45,11 +45,19 @@
 
 <div class="row">
     <div class="col-md-3">
+        <div ng-show="vm.riderPickedUp == true && vm.calcDistance(vm.location, vm.centerMarker)<.0005">
+
+            <button class="btn btn-default"
+                    ng-click="vm.dropOffRider()">
+                Drop Off Rider
+            </button>
+        </div>
         <div ng-hide="vm.driverRiderSync == true || vm.calcDistance(vm.riderInfo.location, vm.centerMarker) == null || vm.calcDistance(vm.riderInfo.location, vm.centerMarker)>.0005" >
             <button class="btn btn-default"
                     ng-click="vm.pickupRider()">
                 Pick up Rider
             </button>
+
         </div>
         <div ng-show="vm.displayRiderInfo">
             Rider Name:{{vm.rider.name}} <br />

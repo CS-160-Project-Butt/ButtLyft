@@ -7,6 +7,7 @@ app.controller('driverCtrl', ['$scope', '$interval', '$timeout', '$location', 'a
     vm.endAddress = [0, 0]; // this is the location of the rider's destination
     vm.inputAddress = null; //user types in the textbox and queries where to go, then hits enter or presses search
    // vm.mapCenter = [0, 0]; //position of the center of the map.
+    vm.centerMarker = null;
     vm.dragging = false; //bool: if user is done dragging the map, expand the marker
     vm.riders = driverSignalService.getRiders();
     vm.riderInfo = driverSignalService.getRiderInfo();
@@ -94,6 +95,7 @@ app.controller('driverCtrl', ['$scope', '$interval', '$timeout', '$location', 'a
     vm.displayRiderInfo = false;
     vm.driverOnRoute = false;
     vm.driverRiderSync = false;
+    vm.riderPickedUp = false;
     vm.rider = {};
     vm.displayRider = function (data, name, location) {
         vm.displayRiderInfo = true;
@@ -109,12 +111,12 @@ app.controller('driverCtrl', ['$scope', '$interval', '$timeout', '$location', 'a
     vm.acceptRider = function (rider) {
         vm.driverOnRoute = true;
         vm.displayRiderInfo = false;
-        var temp = angular.copy(vm.centerMarker);
         driverSignalService.queryRider(rider, vm.centerMarker);
         vm.origin = angular.copy(vm.centerMarker);
         
         console.log(vm.origin)
 
+        var temp = angular.copy(vm.centerMarker);
         $timeout(function () {
             vm.location = vm.riderInfo.location;
 
@@ -143,6 +145,7 @@ app.controller('driverCtrl', ['$scope', '$interval', '$timeout', '$location', 'a
     }
 
     vm.pickupRider = function () {
+        vm.riderPickedUp = true;
         var temp = angular.copy(vm.centerMarker);
         driverSignalService.queryRider(rider, vm.centerMarker);
         $timeout(function () {
@@ -161,7 +164,11 @@ app.controller('driverCtrl', ['$scope', '$interval', '$timeout', '$location', 'a
         vm.driverRiderSync = true;
     }
 
+    vm.dropOffRider = function(){
+        $location.path('/userDetails');
+        driverSignalService.dropOffRider();
 
+    }
 
 
 

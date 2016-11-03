@@ -53,6 +53,12 @@ namespace AASC.Partner.API.Hubs
             this.Clients.Others.getPickupSignal(riderUsername);
         }
 
+        // Driver signals to rider that it will pick the rider up
+        public void dropOffRider(string riderUsername)
+        {
+            this.Clients.Others.getDropOffSignal(riderUsername);
+        }
+
         // rider tells driver where it wants to go
         public void broadcastDestinationCoord(string driverUsername, string destCoords)
         {

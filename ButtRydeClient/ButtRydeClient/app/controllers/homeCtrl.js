@@ -7,7 +7,8 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
         vm.startAddress = [0, 0]; //this is used to store the location of the rider's pickup point
         vm.endAddress = [0, 0]; // this is the location of the rider's destination
         vm.inputAddress = null; //user types in the textbox and queries where to go, then hits enter or presses search
-        vm.mapCenter = [0, 0]; //position of the center of the map.
+        //vm.mapCenter = [0, 0]; //position of the center of the map.
+        vm.centerMarker = null;
         vm.dragging = false; //bool: if user is done dragging the map, expand the marker
         vm.drivers = {};
         vm.fare = 0;
@@ -22,9 +23,9 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
         
         vm.init = function () {
             navigator.geolocation.getCurrentPosition(function (position) {
-                signalService.setMyCoords = vm.centerMarker;
-                vm.mapCenter[0] = position.coords.latitude;
-                vm.mapCenter[1] = position.coords.longitude;
+
+                //vm.mapCenter[0] = position.coords.latitude;
+                //vm.mapCenter[1] = position.coords.longitude;
 
                 NgMap.getMap('rider').then(function (map) {
                     vm.map = map; //we get the map
@@ -131,7 +132,6 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
             vm.showConfirmButton = false;
             vm.hidePanel = true;
             signalService.setDestinationCoords(vm.endAddress);
-            
             signalService.boardCastConfirmSignal(vm.startAddress);
         }
 
@@ -146,15 +146,31 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
 
 
 
-
         vm.stop;
         vm.signalInterval = function () {
             if (angular.isDefined(vm.stop)) return;
 
             vm.stop = $interval(function () {
-                
-            }, 100);
+                if (signalService.getDriverInfo().pickupSignal == true) {
+                    vm.setCenterMarker();
+                }
+                if (signalService.getDriverInfo().dropOffSignal == true) {
+                    vm.goToEnd();
+                }
+
+            }, 50);
         };
+        vm.setCenterMarker = function () {
+            var temp = angular.copy(signalService.getMyCoords());
+
+            vm.onCenterChanged(temp);
+            vm.map.setCenter({ lat: temp[0], lng: temp[1] })
+        }
+        vm.goToEnd = function () {
+            $location.path('/userDetails');
+        }
+
+
         vm.signalInterval();
 
         vm.stopInterval = function () {

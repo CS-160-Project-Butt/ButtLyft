@@ -84,7 +84,10 @@ app.factory('driverSignalService', ['authService','$', function (authService, $)
 
             hub.invoke('pickupRider', riderInfo.name);
             console.log(riderInfo.name);
+        },
+        dropOffRider: function (riderName) {
 
+            hub.invoke('dropOffRider', riderInfo.name);
         }
 
     }

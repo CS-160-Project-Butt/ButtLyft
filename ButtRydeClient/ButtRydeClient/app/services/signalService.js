@@ -31,23 +31,33 @@ app.factory('signalService', ['authService', '$', function (authService, $) {
             });
 
             hub.on('receiveLocation', function (driver, geocoords) {
-                var found = false;
 
-                angular.forEach(drivers, function (value, key) {
-                    if (value.name == driver) {
-                        value.name = driver;
-                        value.location = angular.fromJson(geocoords);
-                        found = true;
-                    }
-                });
+                if (pickupSignal == true && driver == foreignDriverUser) {
+                   
+                    myCoords = angular.copy(angular.fromJson(geocoords));
 
-                if (!found) {
-                    var temp = {
-                        name: driver,
-                        location: angular.fromJson(geocoords)
+
+                } else {
+
+                    var found = false;
+
+                    angular.forEach(drivers, function (value, key) {
+                        if (value.name == driver) {
+                            value.name = driver;
+                            value.location = angular.fromJson(geocoords);
+                            found = true;
+                        }
+                    });
+
+                    if (!found) {
+                        var temp = {
+                            name: driver,
+                            location: angular.fromJson(geocoords)
+                        }
+                        drivers.push(temp);
                     }
-                    drivers.push(temp);
                 }
+
             });
 
             hub.on('collectDriverSignal', function (driver, rider, coords) {
@@ -65,7 +75,14 @@ app.factory('signalService', ['authService', '$', function (authService, $) {
                 console.log(me);
                 if (riderUser == me) {
                     pickupSignal = true;
+                    driverInfo.pickupSignal = true;
                     selfService.sendDestinationCoordinate();
+                }
+            });
+            hub.on('getDropOffSignal', function (me) {
+
+                if (riderUser == me) {
+                    driverInfo.dropOffSignal = true;
                 }
             });
         },
@@ -84,7 +101,11 @@ app.factory('signalService', ['authService', '$', function (authService, $) {
         getDriverInfo: function () {
             return driverInfo;
         },
+        getMyCoords: function () {
+            return myCoords;
+        },
         setDestinationCoords: function (data) {
+            console.log(data)
             destinationCoords = data;
         },
         boardCastConfirmSignal: function (geocoords) { //driver tells everyone that it is ok for pickup
