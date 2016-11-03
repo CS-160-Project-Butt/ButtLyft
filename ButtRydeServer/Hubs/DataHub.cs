@@ -22,11 +22,23 @@ namespace AASC.Partner.API.Hubs
         }
 
 
-        // Driver broadcasts a message to all other riders and drivers with its location every 3 second
+        // Driver broadcasts a message to all other riders and drivers with its location every x second
         public void driverBroadcastLocation(string driverUsername, string geocoords)
         {
             this.Clients.Others.receiveLocation(driverUsername, geocoords);
         }
+
+        // Rider broadcast to all drivers that it wants to be picked up
+        public void pickMeUpSignal(string riderUsername, string geocoords)
+        {
+            this.Clients.Others.receivePickMeUpSignal(riderUsername, geocoords);
+        }
+
+
+
+
+
+
 
 
         // Driver broadcasts its location to rider every 3 second
@@ -50,11 +62,7 @@ namespace AASC.Partner.API.Hubs
         }
 
 
-        // Rider broadcast to all drivers that it wants to be picked up
-        public void pickMeUpSignal(string riderUsername)
-        {
-            this.Clients.Others.pickMeUpSignal(riderUsername);
-        }
+
 
 
         // Driver signals to rider that it will pick the rider up

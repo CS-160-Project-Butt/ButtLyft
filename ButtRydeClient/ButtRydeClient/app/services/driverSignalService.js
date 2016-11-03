@@ -4,6 +4,8 @@ app.factory('driverSignalService', ['authService','$', function (authService, $)
     var connection = null;
     var hub = null;
     var driverUser = null;
+    var foreignRiderUser = null;
+    var availableRiders = [];
 
     return {
         initialize: function () {
@@ -14,10 +16,29 @@ app.factory('driverSignalService', ['authService','$', function (authService, $)
 
             hub.on('onHit', function (data) {
                 console.log(data);
-            })
-            hub.on('currentLocation', function(data){
+            });
+            hub.on('currentLocation', function (data) {
                 console.log(data);
-            })
+            });
+            hub.on('receivePickMeUpSignal', function (rider, geocoords) {
+                var found = false;
+
+                angular.forEach(availableRiders, function (value, key) {
+                    if (value.name == rider) {
+                        value.name = rider;
+                        value.location = angular.fromJson(geocoords);
+                        found = true;
+                    }
+                });
+
+                if (!found) {
+                    var temp = {
+                        name: rider,
+                        location: angular.fromJson(geocoords)
+                    }
+                    drivers.push(temp);
+                }
+            });
 
         },
         hit: function () {

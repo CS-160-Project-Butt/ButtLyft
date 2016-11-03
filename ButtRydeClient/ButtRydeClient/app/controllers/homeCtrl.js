@@ -97,11 +97,12 @@ app.controller('homeCtrl', ['$scope', '$interval', '$timeout', '$location', 'aut
         signalService.sendMessage(message);
     }
 
+    
+
 
 
     vm.stop;
     vm.signalInterval = function () {
-        // Don't start a new fight if we are already fighting
         if (angular.isDefined(vm.stop)) return;
 
         vm.stop = $interval(function () {

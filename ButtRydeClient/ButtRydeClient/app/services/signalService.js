@@ -1,12 +1,16 @@
 ﻿'use strict';
-app.factory('signalService', ['$', function ($) {
+app.factory('signalService', ['authService','$', function (authService, $) {
 
     var connection = null;
     var hub = null;
-    var currentUser = null;
+    var riderUser = null;
+    var foreignDriverUser = null;
+
     var drivers = [];
     return {
         initialize: function () {
+
+            riderUser = authService.authentication.userName;
             connection = $.hubConnection('http://localhost:1272/');
             hub = connection.createHubProxy('dataHub');
             connection.start();
@@ -14,9 +18,11 @@ app.factory('signalService', ['$', function ($) {
             hub.on('onHit', function (data) {
                 console.log(data);
             });
+
             hub.on('currentMessage', function (data) {
                 console.log(data);
             });
+
             hub.on('receiveLocation', function (driver, geocoords) {
                 var found = false;
 
@@ -49,6 +55,9 @@ app.factory('signalService', ['$', function ($) {
         },
         getDrivers: function () {
             return drivers;
+        },
+        pickMeUpSignal: function (geocoords) { //driver tells everyone that it is ok for pickup
+            hub.invoke('pickMeUpSignal', riderUser, angular.toJson(geocoords))
         }
     //    addNote: function (note) { //invoking a method with data
     //    hub.invoke('addNote', note);
