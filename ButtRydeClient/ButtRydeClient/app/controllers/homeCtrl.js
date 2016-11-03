@@ -154,7 +154,7 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
                 if (signalService.getDriverInfo().pickupSignal == true) {
                     vm.setCenterMarker();
                 }
-                if (signalService.getDriverInfo().dropOffSignal == true) {
+                if (signalService.getDriverInfo().dropOffSignal == true && vm.stopAll == true) {
                     vm.goToEnd();
                 }
 
@@ -166,8 +166,11 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
             vm.onCenterChanged(temp);
             vm.map.setCenter({ lat: temp[0], lng: temp[1] })
         }
+        vm.stopAll = true;
         vm.goToEnd = function () {
+            vm.stopAll = false;
             $location.path('/userDetails');
+
         }
 
 

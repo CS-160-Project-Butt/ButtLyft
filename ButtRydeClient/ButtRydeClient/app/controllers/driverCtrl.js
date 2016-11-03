@@ -164,7 +164,8 @@ app.controller('driverCtrl', ['$scope', '$interval', '$timeout', '$location', 'a
         vm.driverRiderSync = true;
     }
 
-    vm.dropOffRider = function(){
+    vm.dropOffRider = function () {
+
         $location.path('/userDetails');
         driverSignalService.dropOffRider();
 
