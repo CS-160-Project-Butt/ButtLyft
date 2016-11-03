@@ -130,7 +130,8 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
         vm.confirmFare = function () {
             vm.showConfirmButton = false;
             vm.hidePanel = true;
-
+            signalService.setDestinationCoords(vm.endAddress);
+            
             signalService.boardCastConfirmSignal(vm.startAddress);
         }
 

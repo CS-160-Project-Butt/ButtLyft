@@ -54,7 +54,12 @@ app.factory('driverSignalService', ['authService','$', function (authService, $)
                     console.log(riderInfo);
                 }
             });
-
+            hub.on('getDestinationCoord', function (driver, coord) {
+                if (driverUser == driver) {
+                    riderInfo.destination = angular.fromJson(coord);
+                    console.log(riderInfo);
+                }
+            });
 
         },
         hit: function () {
@@ -75,8 +80,11 @@ app.factory('driverSignalService', ['authService','$', function (authService, $)
         queryRider: function (riderName, drivercoords) {
             hub.invoke('queryRider', driverUser, riderName, angular.toJson(drivercoords));
         },
-        pickUpRider: function (riderName) {
-            hub.invoke('pickUpRider', riderName);
+        pickupRider: function (riderName) {
+
+            hub.invoke('pickupRider', riderInfo.name);
+            console.log(riderInfo.name);
+
         }
 
     }

@@ -6,7 +6,7 @@ app.controller('driverCtrl', ['$scope', '$interval', '$timeout', '$location', 'a
     vm.startAddress = [0, 0]; //this is used to store the location of the rider's pickup point
     vm.endAddress = [0, 0]; // this is the location of the rider's destination
     vm.inputAddress = null; //user types in the textbox and queries where to go, then hits enter or presses search
-    vm.mapCenter = [0, 0]; //position of the center of the map.
+   // vm.mapCenter = [0, 0]; //position of the center of the map.
     vm.dragging = false; //bool: if user is done dragging the map, expand the marker
     vm.riders = driverSignalService.getRiders();
     vm.riderInfo = driverSignalService.getRiderInfo();
@@ -23,8 +23,8 @@ app.controller('driverCtrl', ['$scope', '$interval', '$timeout', '$location', 'a
     vm.init = function () {
         navigator.geolocation.getCurrentPosition(function (position) {
 
-            vm.mapCenter[0] = position.coords.latitude;
-            vm.mapCenter[1] = position.coords.longitude;
+            //vm.mapCenter[0] = position.coords.latitude;
+            //vm.mapCenter[1] = position.coords.longitude;
 
             NgMap.getMap('rider').then(function (map) {
                 vm.map = map; //we get the map
@@ -91,10 +91,9 @@ app.controller('driverCtrl', ['$scope', '$interval', '$timeout', '$location', 'a
         vm.stopInterval();
     });
 
-
-
     vm.displayRiderInfo = false;
     vm.driverOnRoute = false;
+    vm.driverRiderSync = false;
     vm.rider = {};
     vm.displayRider = function (data, name, location) {
         vm.displayRiderInfo = true;
@@ -105,22 +104,34 @@ app.controller('driverCtrl', ['$scope', '$interval', '$timeout', '$location', 'a
             $scope.$apply();
         }
     }
-
+    vm.origin = null;
+    vm.destination = null;
     vm.acceptRider = function (rider) {
-
         vm.driverOnRoute = true;
         vm.displayRiderInfo = false;
         var temp = angular.copy(vm.centerMarker);
         driverSignalService.queryRider(rider, vm.centerMarker);
-        vm.driverStartLocation = angular.copy(vm.centerMarker);
+        vm.origin = angular.copy(vm.centerMarker);
+        
+        console.log(vm.origin)
+
         $timeout(function () {
-            vm.onCenterChanged(temp);
-            vm.map.setCenter({lat: temp[0], lng: temp[1]})
+            vm.location = vm.riderInfo.location;
+
+
+            $timeout(function () {
+
+
+                vm.onCenterChanged(temp);
+                vm.map.setCenter({ lat: temp[0], lng: temp[1] })
+            }, 500);
         }, 1000);
     }
+
     vm.declineRider = function () {
         vm.displayRiderInfo = false;
     }
+
     vm.calcDistance = function (x,y) {
         if (x == null || y == null) {
             return null
@@ -131,9 +142,23 @@ app.controller('driverCtrl', ['$scope', '$interval', '$timeout', '$location', 'a
         return result;
     }
 
-    vm.pickUpRider - function () {
-        driverSignalService.pickUpRider();
+    vm.pickupRider = function () {
+        var temp = angular.copy(vm.centerMarker);
+        driverSignalService.queryRider(rider, vm.centerMarker);
+        $timeout(function () {
 
+            vm.driverStartLocation = angular.copy(vm.centerMarker);
+            vm.location = vm.riderInfo.destination;
+            $timeout(function () {
+
+                vm.onCenterChanged(temp);
+                vm.map.setCenter({ lat: temp[0], lng: temp[1] })
+            }, 500);
+        }, 1000);
+
+        driverSignalService.pickupRider();
+        vm.origin = angular.copy(vm.centerMarker)
+        vm.driverRiderSync = true;
     }
 
 

@@ -45,9 +45,9 @@
 
 <div class="row">
     <div class="col-md-3">
-        <div ng-hide="vm.calcDistance(vm.riderInfo.location, vm.centerMarker) == null || vm.calcDistance(vm.riderInfo.location, vm.centerMarker)>.0005">
+        <div ng-hide="vm.driverRiderSync == true || vm.calcDistance(vm.riderInfo.location, vm.centerMarker) == null || vm.calcDistance(vm.riderInfo.location, vm.centerMarker)>.0005" >
             <button class="btn btn-default"
-                    ng-click="vm.pickUpRider()">
+                    ng-click="vm.pickupRider()">
                 Pick up Rider
             </button>
         </div>
@@ -98,8 +98,8 @@
     <div class="col-md-9">
         <ng-map id="rider"
                 center="current-position"
-                disable-default-u-i="true"
                 clickable-icons="false"
+                zoom-to-include-markers ="false"
                 disable-double-click-zoom="true"
                 geo-fallback-center="37.54, -121.98"
                 zoom="17"
@@ -107,11 +107,11 @@
                 on-idle="vm.onDragEnd()"
                 default-style="false"
                 style="height:500px;">
-
             <directions draggable="false"
                         travel-mode="DRIVING"
-                        origin={{vm.driverStartLocation}}
-                        destination={{vm.riderInfo.location}}>
+                        zoom-to-include-markers ="false"
+                        origin={{vm.origin}}
+                        destination={{vm.location}}>
             </directions>
             <marker position="{{vm.centerMarker}}"></marker>
             <marker ng-repeat="m in vm.riders"

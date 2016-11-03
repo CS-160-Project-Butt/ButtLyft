@@ -53,6 +53,12 @@ namespace AASC.Partner.API.Hubs
             this.Clients.Others.getPickupSignal(riderUsername);
         }
 
+        // rider tells driver where it wants to go
+        public void broadcastDestinationCoord(string driverUsername, string destCoords)
+        {
+            this.Clients.Others.getDestinationCoord(driverUsername, destCoords);
+        }
+
 
 
 
