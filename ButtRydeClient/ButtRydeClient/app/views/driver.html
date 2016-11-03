@@ -45,7 +45,13 @@
 
 <div class="row">
     <div class="col-md-3">
-        <div ng-show="vm.rider.name.length>3">
+        <div ng-hide="vm.calcDistance(vm.riderInfo.location, vm.centerMarker) == null || vm.calcDistance(vm.riderInfo.location, vm.centerMarker)>.0005">
+            <button class="btn btn-default"
+                    ng-click="vm.pickUpRider()">
+                Pick up Rider
+            </button>
+        </div>
+        <div ng-show="vm.displayRiderInfo">
             Rider Name:{{vm.rider.name}} <br />
             Rider Location:{{vm.rider.location}} <br />
             <button class="btn btn-default"
@@ -57,11 +63,11 @@
                 Decline Rider
             </button>
         </div>
-        <div>
+        <div ng-hide="vm.driverOnRoute">
             <h4>List of Available Riders</h4>
             <button class="btn btn-sm"
                     ng-repeat="m in vm.riders"
-                    ng-click="vm.displayRider('fakedata',m.name, m.location)">
+                    ng-click="vm.displayRider('data',m.name, m.location)">
                 {{m.name}}
             </button>
 

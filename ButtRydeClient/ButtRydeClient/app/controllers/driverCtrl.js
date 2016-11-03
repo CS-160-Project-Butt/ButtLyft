@@ -91,14 +91,25 @@ app.controller('driverCtrl', ['$scope', '$interval', '$timeout', '$location', 'a
         vm.stopInterval();
     });
 
+
+
+    vm.displayRiderInfo = false;
+    vm.driverOnRoute = false;
     vm.rider = {};
-    vm.displayRider = function (data,name,location) {
+    vm.displayRider = function (data, name, location) {
+        vm.displayRiderInfo = true;
         vm.rider.name = name;
         vm.rider.location = location;
         console.log(vm.rider);
-        $scope.$apply();
+        if (data != 'data') {
+            $scope.$apply();
+        }
     }
+
     vm.acceptRider = function (rider) {
+
+        vm.driverOnRoute = true;
+        vm.displayRiderInfo = false;
         var temp = angular.copy(vm.centerMarker);
         driverSignalService.queryRider(rider, vm.centerMarker);
         vm.driverStartLocation = angular.copy(vm.centerMarker);
@@ -107,7 +118,23 @@ app.controller('driverCtrl', ['$scope', '$interval', '$timeout', '$location', 'a
             vm.map.setCenter({lat: temp[0], lng: temp[1]})
         }, 1000);
     }
+    vm.declineRider = function () {
+        vm.displayRiderInfo = false;
+    }
+    vm.calcDistance = function (x,y) {
+        if (x == null || y == null) {
+            return null
+        }
+        var xsq = (x[1] - y[1]) * (x[1] - y[1]);
+        var ysq = (x[0] - y[0]) * (x[0] - y[0]);
+        var result = Math.sqrt(xsq + ysq);
+        return result;
+    }
 
+    vm.pickUpRider - function () {
+        driverSignalService.pickUpRider();
+
+    }
 
 
 

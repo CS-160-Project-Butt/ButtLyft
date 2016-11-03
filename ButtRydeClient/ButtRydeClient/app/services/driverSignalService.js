@@ -55,6 +55,7 @@ app.factory('driverSignalService', ['authService','$', function (authService, $)
                 }
             });
 
+
         },
         hit: function () {
             hub.invoke('hit');
@@ -73,11 +74,11 @@ app.factory('driverSignalService', ['authService','$', function (authService, $)
         },
         queryRider: function (riderName, drivercoords) {
             hub.invoke('queryRider', driverUser, riderName, angular.toJson(drivercoords));
+        },
+        pickUpRider: function (riderName) {
+            hub.invoke('pickUpRider', riderName);
         }
 
-    //    addNote: function (note) { //invoking a method with data
-    //    hub.invoke('addNote', note);
-    //},
     }
 
     return selfService;

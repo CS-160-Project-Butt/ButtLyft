@@ -7,6 +7,7 @@ app.factory('signalService', ['authService', '$', function (authService, $) {
     var foreignDriverUser = null;
     var driverConnected = false;
 
+    var myCoords = null;
     var driverInfo = {};
     var drivers = [];
 
@@ -45,7 +46,6 @@ app.factory('signalService', ['authService', '$', function (authService, $) {
                     }
                     drivers.push(temp);
                 }
-
             });
 
             hub.on('collectDriverSignal', function (driver, rider, coords) {
@@ -55,6 +55,12 @@ app.factory('signalService', ['authService', '$', function (authService, $) {
                     driverInfo.location = angular.fromJson(coords);
                     console.log(driverInfo);
                     selfService.riderAgreementSignal();
+                }
+            });
+            hub.on('getPickupSignal', function (me) {
+                if (riderUser == me) {
+                    console.log(driverInfo);
+                    selfService.sendMyCoordinates();
                 }
             });
         },
@@ -73,6 +79,9 @@ app.factory('signalService', ['authService', '$', function (authService, $) {
         getDriverInfo: function () {
             return driverInfo;
         },
+        setMyCoords: function (data) {
+            myCoords = data;
+        },
         boardCastConfirmSignal: function (geocoords) { //driver tells everyone that it is ok for pickup
             console.log(geocoords)
             hub.invoke('boardCastConfirmSignal', riderUser, angular.toJson(geocoords))
@@ -82,6 +91,7 @@ app.factory('signalService', ['authService', '$', function (authService, $) {
 
             hub.invoke('riderAgreementSignal', riderUser, foreignDriverUser)
         }
+
         //    addNote: function (note) { //invoking a method with data
         //    hub.invoke('addNote', note);
         //},

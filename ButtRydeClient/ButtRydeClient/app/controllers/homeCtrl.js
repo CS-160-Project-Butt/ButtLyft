@@ -19,10 +19,10 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
         vm.drivers = signalService.getDrivers();
         vm.driverInfo = signalService.getDriverInfo();
         vm.showAllDrivers = true;
-       
+        
         vm.init = function () {
             navigator.geolocation.getCurrentPosition(function (position) {
-
+                signalService.setMyCoords = vm.centerMarker;
                 vm.mapCenter[0] = position.coords.latitude;
                 vm.mapCenter[1] = position.coords.longitude;
 

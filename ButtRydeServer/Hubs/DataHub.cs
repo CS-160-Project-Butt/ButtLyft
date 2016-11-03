@@ -47,6 +47,15 @@ namespace AASC.Partner.API.Hubs
         }
 
 
+        // Driver signals to rider that it will pick the rider up
+        public void pickUpRider(string riderUsername)
+        {
+            this.Clients.Others.getPickupSignal(riderUsername);
+        }
+
+
+
+
 
 
 
@@ -76,11 +85,6 @@ namespace AASC.Partner.API.Hubs
 
 
 
-        // Driver signals to rider that it will pick the rider up
-        public void riderIAmHere(string driverUsername, string riderUsername)
-        {
-            this.Clients.Others.riderIAmHere(driverUsername, riderUsername);
-        }
 
     }
 
