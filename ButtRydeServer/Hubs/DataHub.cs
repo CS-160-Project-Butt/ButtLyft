@@ -29,13 +29,22 @@ namespace AASC.Partner.API.Hubs
         }
 
         // Rider broadcast to all drivers that it wants to be picked up
-        public void pickMeUpSignal(string riderUsername, string geocoords)
+        public void boardCastConfirmSignal(string riderUsername, string geocoords)
         {
-            this.Clients.Others.receivePickMeUpSignal(riderUsername, geocoords);
+            this.Clients.Others.receiveBoardCastConfirmSignal(riderUsername, geocoords);
+        }
+        
+        // Driver signals to rider that it will pick the rider up
+        public void queryRider(string driverUsername, string riderUsername, string driverCoords)
+        {
+            this.Clients.Others.collectDriverSignal(driverUsername, riderUsername, driverCoords);
         }
 
-
-
+        // Rider handshakes back to driver 
+        public void riderAgreementSignal(string riderUsername, string driverUsername)
+        {
+            this.Clients.Others.collectRiderAgreementSignal(riderUsername, driverUsername);
+        }
 
 
 
@@ -65,18 +74,7 @@ namespace AASC.Partner.API.Hubs
 
 
 
-        // Driver signals to rider that it will pick the rider up
-        public void driverAgreementSignal(string driverUsername, string riderUsername)
-        {
-            this.Clients.Others.driverAgreementSignal(driverUsername, riderUsername);
-        }
 
-
-        // Rider handshakes back to driver 
-        public void riderAgreementSignal(string riderUsername, string driverUsername)
-        {
-            this.Clients.Others.riderAgreementSignal(riderUsername, driverUsername);
-        }
 
         // Driver signals to rider that it will pick the rider up
         public void riderIAmHere(string driverUsername, string riderUsername)

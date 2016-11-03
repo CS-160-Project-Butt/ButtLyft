@@ -4,87 +4,123 @@
     }
 </script>
 <style>
-    #floating-panel {
+    .custom-marker:after {
+        content: '';
         position: absolute;
-        top: 10px;
-        left: 25%;
-        z-index: 5;
-        background-color: #fff;
-        text-align: center;
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-        top: 5px;
+        border-style: solid;
+        border-width: 7px 6px 0;
+        border-color: #fff transparent;
+        display: block;
+        width: 0;
+        z-index: 1;
+        margin-left: -6px;
+        bottom: -6px;
         left: 50%;
-        margin-left: -75px;
-        margin-top: -100px;
-        width: 150px;
-        padding: 5px;
-        border: 1px solid #999;
+    }
+
+    .custom-marker:before {
+        content: '';
+        position: absolute;
+        border-style: solid;
+        border-width: 7px 6px 0;
+        border-color: #7F7F7F transparent;
+        display: block;
+        width: 0;
+        z-index: 0;
+        margin-left: -6px;
+        bottom: -7px;
+        left: 50%;
+    }
+
+    .custom-marker {
+        padding: 10px;
+        background: #fff;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        border: #7F7F7F solid 1px;
+        text-align: center;
     }
 </style>
 
 <div class="row">
     <div class="col-md-3">
-        <div class="input-group">
-            <input type="text" ng-model="vm.inputAddress" ng-keypress="($event.charCode==13)? vm.processLocation(vm.inputAddress) : return" class="form-control" placeholder="Type a Location">
-            <span class="input-group-btn">
-                <button class="btn btn-default" ng-click="vm.processLocation(vm.inputAddress);" type="button">Go!</button>
-            </span>
-        </div>
+
+        Route length: {{vm.map.directionsRenderers[0].directions.routes[0].legs[0].distance.text}}
+        <br />
+        Route time: {{vm.map.directionsRenderers[0].directions.routes[0].legs[0].duration.text}}
+        <br />
+        Fare: ${{vm.fare}}
+        <br />
+        Starting Address:{{vm.map.directionsRenderers[0].directions.routes[0].legs[0].start_address}}
+        <br />
+        Ending Address:{{vm.map.directionsRenderers[0].directions.routes[0].legs[0].end_address}}
+        <br />
+        <input type="text"
+               places-auto-complete
+               ng-model="vm.inputAddress"
+               class="form-control"
+               component-restrictions="{country:'us'}"
+               on-place-changed="vm.placeChanged(); vm.inputAddress = ''"
+               placeholder="Type a Location">
+
+        <!--json:{{vm.map.directionsRenderers[0].directions.routes[0].legs[0]}}
+    <br />-->
 
     </div>
     <div class="col-md-9">
-        <ng-map center="{{vm.processLocation()}}"
+        <ng-map id="rider"
+                center="current-position"
+                disable-default-u-i="true"
+                clickable-icons="false"
+                disable-double-click-zoom="true"
+                geo-fallback-center="37.54, -121.98"
                 zoom="17"
                 on-bounds_changed="vm.onCenterChanged()"
                 on-idle="vm.onDragEnd()"
                 default-style="false"
-                style="height:500px">
+                style="height:500px;">
 
-            <directions draggable="true"
-                        panel="directions-panel"
+            <directions draggable="false"
                         travel-mode="DRIVING"
                         origin={{vm.startAddress}}
                         destination={{vm.endAddress}}>
             </directions>
-
-            <marker position="{{vm.centerMarker}}"></marker>
-            <div> <marker position="{{vm.startAddress}}"></marker></div>
-            <div> <marker position="{{vm.endAddress}}"></marker></div>
-            <div> <marker ng-repeat="m in vm.drivers" position="{{m.location}}"></marker></div>
-
-            <custom-marker position="{{vm.centerMarker}}" on-click="vm.startMarkerClicked()">
-                <div data-ng-hide="vm.dragging">
-                    <div id="floating-panel">
-
-                        <div class="row">
-                            <button id="setStart"
-                                    ng-click="vm.setStartAddress()">
-                                Set Pickup Location
-                            </button>
-                            <button id="setStart"
-                                    ng-click="vm.setEndAddress()">
-                                Set Dropoff Location
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </custom-marker>
+            <directions draggable="false"
+                        panel="directions-panel"
+                        travel-mode="DRIVING"
+                        origin={{vm.driverLocation}}
+                        destination={{vm.startAddress}}>
+            </directions>
+            <marker ng-if="!vm.hidePanel"
+                    position="{{vm.centerMarker}}"
+                    animation="Animation.BOUNCE"
+                    centered="true"></marker>
+            <marker position="{{vm.startAddress}}"></marker>
+            <marker position="{{vm.endAddress}}"></marker>
+            <marker ng-repeat="m in vm.drivers" 
+                    position="{{m.location}}"></marker>
+            <div ng-if="!vm.hidePanel&&(vm.showConfirmButton||!vm.dragging)">
+                <custom-marker position="{{vm.centerMarker}}">
+                    <button ng-hide="vm.showConfirmButton"
+                            class="btn btn-sm"
+                            ng-click="vm.setStartAddress()">
+                        Set Pickup Location
+                    </button>
+                    <button ng-hide="vm.showConfirmButton"
+                            class="btn btn-sm"
+                            ng-click="vm.setEndAddress();vm.calculateFare()">
+                        Set Dropoff Location
+                    </button>
+                    <button ng-show="vm.showConfirmButton" 
+                            class="btn btn-warning"
+                            ng-click="vm.confirmFare();">
+                        Request Driver
+                    </button>
+                </custom-marker>
+            </div>
 
         </ng-map>
     </div>
-
-</div>
-<div class="row">
-    Route length: {{(vm.map.directionsRenderers[0].directions.routes[0].overview_path.length != null)?vm.map.directionsRenderers[0].directions.routes[0].overview_path.length * 0.1:null}} km
-    <br />
-    Route time: {{(vm.map.directionsRenderers[0].directions.routes[0].overview_path.length != null)?vm.map.directionsRenderers[0].directions.routes[0]:null}} km
-<br /> 
-    Lat: {{vm.centerMarker[0]}}<br />
-    Long: {{vm.centerMarker[1]}}
-
-
-
 
 </div>

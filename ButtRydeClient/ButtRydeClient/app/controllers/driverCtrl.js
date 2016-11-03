@@ -8,49 +8,38 @@ app.controller('driverCtrl', ['$scope', '$interval', '$timeout', '$location', 'a
     vm.inputAddress = null; //user types in the textbox and queries where to go, then hits enter or presses search
     vm.mapCenter = [0, 0]; //position of the center of the map.
     vm.dragging = false; //bool: if user is done dragging the map, expand the marker
+    vm.riders = driverSignalService.getRiders();
+    vm.riderInfo = driverSignalService.getRiderInfo();
+    vm.driverStartLocation = [0,0];
 
-    NgMap.getMap().then(function (map) { //this could be used as an initialize function
-        if (vm.map == null) {
-            console.log("mapisnull")
-            vm.map = map; //we get the map
-        }
-        console.log(vm.startAddress);
-        console.log(map); //checking out the map
-        console.log('markers', map.markers);
-        console.log('shapes', map.shapes);
-        vm.processLocation();
-        vm.onCenterChanged();//initialize the position of the center marker
-        vm.onDragEnd();
-        console.log(vm.authentication.userName)
-    });
+    vm.riderLocation = [0, 0];
 
-
-
-
-    /**
-     * Used by the html map to alter/update the map location
-     * when we start program, map center initialized to geolocation
-     * after that its wherever the user drags to(number array pair), or the typed in address(string)
-     * after the center is changed we have to update the position of the center marker
-     * parameter: location - usually is null, if not null then force map position to be &location, update center marker
-     */
-    vm.processLocation = function (location) {
-        if (vm.mapCenter[0] == 0 && vm.mapCenter[1] == 0) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-                vm.mapCenter[0] = position.coords.latitude;
-                vm.mapCenter[1] = position.coords.longitude;
-
-                vm.onCenterChanged();
-            }, function (err) { });
-        }
-        if (location != null) {
-            vm.mapCenter = vm.inputAddress;
-            vm.inputAddress = null;
-
-            vm.onCenterChanged(vm.mapCenter);
-        }
-        return vm.mapCenter;
+    vm.placeChanged = function () {
+        vm.place = this.getPlace();
+        console.log('location', vm.place.geometry.location);
+        vm.map.setCenter(vm.place.geometry.location);
     }
+
+    vm.init = function () {
+        navigator.geolocation.getCurrentPosition(function (position) {
+
+            vm.mapCenter[0] = position.coords.latitude;
+            vm.mapCenter[1] = position.coords.longitude;
+
+            NgMap.getMap('rider').then(function (map) {
+                vm.map = map; //we get the map
+                vm.initBool = false;
+                //console.log(vm.map); //checking out the map
+                //console.log('markers', map.markers);
+                //console.log('shapes', map.shapes);
+
+                vm.onCenterChanged();//initialize the position of the center marker
+                vm.onDragEnd();
+
+            });
+        }, function (err) { });
+    }
+    vm.init();
 
     /**
      * when we are done dragging the map or if idle we have to expand the little box thing
@@ -65,53 +54,27 @@ app.controller('driverCtrl', ['$scope', '$interval', '$timeout', '$location', 'a
      * parameter: center, usually null, if not null then we will set the pos of marker to the argument(&center) instead
      */
     vm.onCenterChanged = function (center) {
+
         vm.dragging = true;
-        if (vm.map != null) {
-            var temp = [0, 0];
-            temp[0] = vm.map.getCenter().lat();
-            temp[1] = vm.map.getCenter().lng();
-            if (center != null) temp = center
-            vm.centerMarker = temp;
-        }
+        var temp = [0, 0];
+        temp[0] = vm.map.getCenter().lat();
+        temp[1] = vm.map.getCenter().lng();
+        if (center != null) temp = center
+        if (temp[0] != null && temp[1] != null) vm.centerMarker = temp;
+
     }
 
     /**
-     * once we figure out where we want to get picked up from we click the button and the button calls this and does things
-     */
-    vm.setStartAddress = function () {
-        vm.startAddress = angular.copy(vm.centerMarker);
-        console.log("your starting address is" + vm.centerMarker);
-    }
-    vm.setEndAddress = function () {
-        vm.endAddress = angular.copy(vm.centerMarker);
-        console.log("your ending address is" + vm.centerMarker);
-    }
-
-    vm.triggerCounter = function () {
-        driverSignalService.hit();
-    }
-
-    /**
-    * Get the current location of the driver and broadcast it to all the riders every three seconds.
+    * Get the current location of the driver and broadcast it to all the riders every x seconds.
     */
-    vm.currentLocation;
-
-    //vm.sendLocation = $timeout(function () {
-    //    console.log(vm.mapCenter)
-    //    signalService.sendLocation(vm.mapCenter);
-    //    vm.sendLocation = $timeout(vm.sendLocationLambda, 3000)
-    //}, 3000);
-
-    //vm.sendLocationLambda = 
 
     vm.stop;
     vm.signalInterval = function() {
-        // Don't start a new fight if we are already fighting
         if ( angular.isDefined(vm.stop) ) return;
 
         vm.stop = $interval(function () {
-            console.log(vm.centerMarker)
             driverSignalService.broadcastLocation(vm.centerMarker);
+            
         }, 100);
     };
     vm.signalInterval();
@@ -128,7 +91,22 @@ app.controller('driverCtrl', ['$scope', '$interval', '$timeout', '$location', 'a
         vm.stopInterval();
     });
 
-
+    vm.rider = {};
+    vm.displayRider = function (data,name,location) {
+        vm.rider.name = name;
+        vm.rider.location = location;
+        console.log(vm.rider);
+        $scope.$apply();
+    }
+    vm.acceptRider = function (rider) {
+        var temp = angular.copy(vm.centerMarker);
+        driverSignalService.queryRider(rider, vm.centerMarker);
+        vm.driverStartLocation = angular.copy(vm.centerMarker);
+        $timeout(function () {
+            vm.onCenterChanged(temp);
+            vm.map.setCenter({lat: temp[0], lng: temp[1]})
+        }, 1000);
+    }
 
 
 

@@ -1,8 +1,8 @@
 ﻿'use strict';
-app.controller('indexCtrl', ['$location', 'authService',
-    function ($location, authService) {  
-        var vm = this;
-        vm.logOut = function () {
+app.controller('indexCtrl', ['$scope','$route','$location', 'authService',
+function ($scope,$route, $location, authService) {
+
+    $scope.logOut = function () {
             authService.logOut();
             $location.path('/login');
         }
@@ -17,16 +17,16 @@ app.controller('indexCtrl', ['$location', 'authService',
             return false;
         };
 
-        vm.roles = [];
+        $scope.roles = [];
 
-        vm.authentication = authService.authentication;
+        $scope.authentication = authService.authentication;
 
         authService.getUserRoles().then(function (resRoles) {
-            vm.roles = resRoles.data;
-            console.log(vm.roles);
+            $scope.roles = resRoles.data;
+            console.log($scope.roles);
         });
 
-        vm.isUserInRoles = function (roles) {
+        $scope.isUserInRoles = function (roles) {
             var authorizedRoles = [];
             if (!angular.isArray(roles)) {
                 authorizedRoles = [roles];
@@ -37,7 +37,7 @@ app.controller('indexCtrl', ['$location', 'authService',
             return result;
         };
 
-        vm.loc = function () {
+        $scope.loc = function () {
             return $location.path();
         };
 

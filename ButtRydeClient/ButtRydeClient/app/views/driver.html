@@ -4,117 +4,115 @@
     }
 </script>
 <style>
-    #floating-panel {
+    .custom-marker:after {
+        content: '';
         position: absolute;
-        top: 10px;
-        left: 25%;
-        z-index: 5;
-        background-color: #fff;
-        text-align: center;
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-        top: 5px;
+        border-style: solid;
+        border-width: 7px 6px 0;
+        border-color: #fff transparent;
+        display: block;
+        width: 0;
+        z-index: 1;
+        margin-left: -6px;
+        bottom: -6px;
         left: 50%;
-        margin-left: -75px;
-        margin-top: -100px;
-        width: 150px;
-        padding: 5px;
-        border: 1px solid #999;
+    }
+
+    .custom-marker:before {
+        content: '';
+        position: absolute;
+        border-style: solid;
+        border-width: 7px 6px 0;
+        border-color: #7F7F7F transparent;
+        display: block;
+        width: 0;
+        z-index: 0;
+        margin-left: -6px;
+        bottom: -7px;
+        left: 50%;
+    }
+
+    .custom-marker {
+        padding: 10px;
+        background: #fff;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        border: #7F7F7F solid 1px;
+        text-align: center;
     }
 </style>
 
-
 <div class="row">
-    <div class="col-md-2">
-        &nbsp;
-    </div>
-    <div class="col-md-4">
-        <h1>Driver Dashboard</h1>
+    <div class="col-md-3">
+        <div ng-show="vm.rider.name.length>3">
+            Rider Name:{{vm.rider.name}} <br />
+            Rider Location:{{vm.rider.location}} <br />
+            <button class="btn btn-default"
+                    ng-click="vm.acceptRider(vm.rider.name);">
+                Accept Rider
+            </button>
+            <button class="btn btn-default"
+                    ng-click="vm.declineRider()">
+                Decline Rider
+            </button>
+        </div>
+        <div>
+            <h4>List of Available Riders</h4>
+            <button class="btn btn-sm"
+                    ng-repeat="m in vm.riders"
+                    ng-click="vm.displayRider('fakedata',m.name, m.location)">
+                {{m.name}}
+            </button>
+
+        </div>
+        <input type="text"
+               places-auto-complete
+               ng-model="vm.inputAddress"
+               class="form-control"
+               component-restrictions="{country:'us'}"
+               on-place-changed="vm.placeChanged(); vm.inputAddress = ''"
+               placeholder="Type a Location">
+
+        <!--<br />
+        Route length: {{vm.map.directionsRenderers[0].directions.routes[0].legs[0].distance.text}}
+        <br />
+        Route time: {{vm.map.directionsRenderers[0].directions.routes[0].legs[0].duration.text}}
+        <br />
+        Starting Address:{{vm.map.directionsRenderers[0].directions.routes[0].legs[0].start_address}}
+        <br />
+        Ending Address:{{vm.map.directionsRenderers[0].directions.routes[0].legs[0].end_address}}
+        <br />-->
+       
+
+        <!--json:{{vm.map.directionsRenderers[0].directions.routes[0].legs[0]}}
+        <br />-->
 
     </div>
-    <div class="col-md-4">
-
-    </div>
-    <div class="col-md-2">
-        &nbsp;
-    </div>
-
-</div>
-
-<div class="row">
-    <div class="col-md-2">
-        &nbsp;
-    </div>
-    <div class="col-md-8">
-        <ng-map center="{{vm.processLocation()}}"
+    <div class="col-md-9">
+        <ng-map id="rider"
+                center="current-position"
+                disable-default-u-i="true"
+                clickable-icons="false"
+                disable-double-click-zoom="true"
+                geo-fallback-center="37.54, -121.98"
                 zoom="17"
                 on-bounds_changed="vm.onCenterChanged()"
                 on-idle="vm.onDragEnd()"
                 default-style="false"
-                style="height:500px">
-            <input type="text" ng-model="vm.inputAddress" ng-keypress="($event.charCode==13)? vm.processLocation(vm.inputAddress) : return" />
-            <br />
-            Directions path length:{{(vm.map.directionsRenderers[0].directions.routes[0].overview_path.length != null)?vm.map.directionsRenderers[0].directions.routes[0].overview_path.length * 0.1:null}} km
-            <br />
-            <button ng-click="vm.processLocation(vm.inputAddress);">Search</button>
+                style="height:500px;">
 
-            Lat: {{vm.centerMarker[0]}}
-            Long: {{vm.centerMarker[1]}}
-            <directions draggable="true"
-                        panel="directions-panel"
+            <directions draggable="false"
                         travel-mode="DRIVING"
-                        origin={{vm.startAddress}}
-                        destination={{vm.endAddress}}>
+                        origin={{vm.driverStartLocation}}
+                        destination={{vm.riderInfo.location}}>
             </directions>
-
-            <!--<marker position="current-location"></marker>-->   <!-- Client marker -->
-            <marker position="[37.336665, -121.894047]"></marker>   <!-- Test driver marker -->
-
             <marker position="{{vm.centerMarker}}"></marker>
-            <div> <marker position="{{vm.startAddress}}"></marker></div>
-            <div> <marker position="{{vm.endAddress}}"></marker></div>
-
-
-            <custom-marker position="{{vm.centerMarker}}" on-click="vm.startMarkerClicked()">
-                <div data-ng-hide="vm.dragging">
-                    <div id="floating-panel">
-
-                        <div class="row">
-                            <button id="setStart"
-                                    ng-click="vm.setStartAddress()">
-                                Set Pickup Location
-                            </button>
-                            <button id="setStart"
-                                    ng-click="vm.setEndAddress()">
-                                Set Dropoff Location
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </custom-marker>
+            <marker ng-repeat="m in vm.riders"
+                    position="{{m.location}}"
+                    on-click="vm.displayRider(m.name, m.location)"></marker>
 
         </ng-map>
-    </div>
-
-</div>
-<div class="row">
-    <div class="col-md-2">
-        &nbsp;
-    </div>
-    <div class="col-md-4">
-
-        <br /><br /><br /><br />
-
-        <button ng-click="vm.triggerCounter()">Trigger</button>
-        <button ng-click="vm.sendMessage('Hello World')">Say Hello</button>
-
-    </div>
-    <div class="col-md-4">
-
-    </div>
-    <div class="col-md-2">
-        &nbsp;
     </div>
 
 </div>

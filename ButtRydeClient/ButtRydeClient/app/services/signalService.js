@@ -1,15 +1,19 @@
 ﻿'use strict';
-app.factory('signalService', ['authService','$', function (authService, $) {
+app.factory('signalService', ['authService', '$', function (authService, $) {
 
     var connection = null;
     var hub = null;
     var riderUser = null;
     var foreignDriverUser = null;
+    var driverConnected = false;
 
+    var driverInfo = {};
     var drivers = [];
-    return {
-        initialize: function () {
 
+
+    var selfService = {
+        initialize: function () {
+            console.log('hello')
             riderUser = authService.authentication.userName;
             connection = $.hubConnection('http://localhost:1272/');
             hub = connection.createHubProxy('dataHub');
@@ -43,6 +47,16 @@ app.factory('signalService', ['authService','$', function (authService, $) {
                 }
 
             });
+
+            hub.on('collectDriverSignal', function (driver, rider, coords) {
+                if (foreignDriverUser == null && rider == riderUser) {
+                    foreignDriverUser = driver;
+                    driverInfo.name = driver;
+                    driverInfo.location = angular.fromJson(coords);
+                    console.log(driverInfo);
+                    selfService.riderAgreementSignal();
+                }
+            });
         },
         setCurrentUser: function (user) {
             currentUser = user;
@@ -50,19 +64,28 @@ app.factory('signalService', ['authService','$', function (authService, $) {
         hit: function () {
             hub.invoke('hit');
         },
-        sendMessage: function(message){
+        sendMessage: function (message) {
             hub.invoke('sendMessage', message);
         },
         getDrivers: function () {
             return drivers;
         },
-        pickMeUpSignal: function (geocoords) { //driver tells everyone that it is ok for pickup
-            hub.invoke('pickMeUpSignal', riderUser, angular.toJson(geocoords))
+        getDriverInfo: function () {
+            return driverInfo;
+        },
+        boardCastConfirmSignal: function (geocoords) { //driver tells everyone that it is ok for pickup
+            console.log(geocoords)
+            hub.invoke('boardCastConfirmSignal', riderUser, angular.toJson(geocoords))
+        },
+        riderAgreementSignal: function () { 
+            console.log(foreignDriverUser);
+
+            hub.invoke('riderAgreementSignal', riderUser, foreignDriverUser)
         }
-    //    addNote: function (note) { //invoking a method with data
-    //    hub.invoke('addNote', note);
-    //},
+        //    addNote: function (note) { //invoking a method with data
+        //    hub.invoke('addNote', note);
+        //},
     }
 
-
+    return selfService;
 }]);
