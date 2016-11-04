@@ -13,6 +13,8 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
         vm.drivers = {};
         vm.fare = 0;
 
+        vm.pickupSelected = false;
+
         vm.showConfirmButton = false;
         vm.hidePanel = false;
 
@@ -112,6 +114,8 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
         vm.setStartAddress = function () {
             console.log(vm.centerMarker)
             vm.startAddress = angular.copy(vm.centerMarker);
+            vm.pickupSelected = true;
+
             if (vm.endAddress != [0, 0]) {
                 $timeout(function () {
                     vm.calculateFare();

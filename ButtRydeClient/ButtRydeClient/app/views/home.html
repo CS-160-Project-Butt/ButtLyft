@@ -102,16 +102,20 @@
                     position="{{m.location}}"></marker>
             <div ng-if="!vm.hidePanel&&(vm.showConfirmButton||!vm.dragging)">
                 <custom-marker position="{{vm.centerMarker}}">
-                    <button ng-hide="vm.showConfirmButton"
-                            class="btn btn-sm"
-                            ng-click="vm.setStartAddress()">
-                        Set Pickup Location
-                    </button>
-                    <button ng-hide="vm.showConfirmButton"
-                            class="btn btn-sm"
-                            ng-click="vm.setEndAddress();vm.calculateFare()">
-                        Set Dropoff Location
-                    </button>
+                    <div ng-if="!vm.pickupSelected">
+                        <button ng-hide="vm.showConfirmButton"
+                                class="btn btn-sm"
+                                ng-click="vm.setStartAddress();">
+                            Set Pickup Location
+                        </button>
+                    </div>
+                    <div ng-if="vm.pickupSelected">
+                        <button ng-hide="vm.showConfirmButton"
+                                class="btn btn-sm"
+                                ng-click="vm.setEndAddress();vm.calculateFare()">
+                            Set Dropoff Location
+                        </button>
+                    </div>
                     <button ng-show="vm.showConfirmButton" 
                             class="btn btn-warning"
                             ng-click="vm.confirmFare();">
