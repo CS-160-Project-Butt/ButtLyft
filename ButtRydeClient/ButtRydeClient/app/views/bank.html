@@ -1,0 +1,59 @@
+﻿<script type="text/javascript">
+    if (typeof app === 'undefined') {
+        document.location.href = "/";
+    }
+</script>
+
+<!-- Header 
+<header>
+    <div class="header-content">
+        <div class="header-content-inner">
+            <h1>Banking Made Easy</h1>
+            <p>Add funds to your account in one easy step.</p>
+            <a href="#" class="btn btn-primary btn-lg">Add Funds Now</a>
+        </div>
+    </div>
+</header>
+-->
+<div class="row">
+    <div class="col-md-2">
+        &nbsp;
+    </div>
+    <div class="col-md-6">
+        <h1>Banking Made Easy</h1>
+        <table class="table">
+            <tr ng-repeat="user in vm.allUsersList">
+                <td>
+                    
+                    First Name: {{user.firstName}}, Last Name: {{user.lastName}}, Username: {{user.userName}}
+                </td>
+                <td>
+                    Add $50
+                    <button ng-click="vm.add($index)"><strong>Add</strong></button>
+                    <p ng-show="vm.showAddition[$index]"><strong>You added funds!</strong></p> 
+                </td>
+                <td>
+                    Add $100
+                    <button ng-click="vm.add($index)"><strong>Add</strong></button>
+                    <p ng-show="vm.showAddition[$index]"><strong>You added funds!</strong></p> 
+                </td>
+            </tr>
+
+        </table>
+
+
+        <div class="row">
+            Add Funds Now!
+        </div>
+
+
+    </div>
+    <div class="col-md-4">
+
+    </div>
+    <div class="col-md-2">
+        &nbsp;
+    </div>
+</div>
+
+

@@ -12,6 +12,11 @@ app.config(function ($routeProvider, $locationProvider) {
         templateUrl: "/app/views/driver.html"
     });
 
+    $routeProvider.when("/bank", {
+        controller: "bankCtrl as vm",
+        templateUrl: "/app/views/bank.html"
+    });
+
     $routeProvider.when("/login", {
         controller: "loginCtrl as vm",
         templateUrl: "/app/views/login.html"
