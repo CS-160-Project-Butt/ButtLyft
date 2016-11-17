@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('bankCtrl', ['$location', 'authService', function ($location, authService) {
+app.controller('accountCtrl', ['$location', 'authService', 'accountService', function ($location, authService, accountService) {
     var vm = this;
     function containsAny(source, target) {
         for (var i = 0; i < target.length; i++) {
@@ -52,6 +52,8 @@ app.controller('bankCtrl', ['$location', 'authService', function ($location, aut
 
     vm.showAddition = {};
     vm.add = function (idx) {
+        accountService.deposit(50)
+        accountService.getBalance
         vm.showAddition[idx] = true
     };
 

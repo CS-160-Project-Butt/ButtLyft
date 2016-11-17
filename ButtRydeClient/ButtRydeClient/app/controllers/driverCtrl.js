@@ -1,8 +1,9 @@
 ﻿'use strict';
-app.controller('driverCtrl', ['$scope', '$interval', '$timeout', '$location', 'authService', 'driverSignalService', 'NgMap', function ($scope, $interval, $timeout, $location, authService, driverSignalService, NgMap) {
+app.controller('driverCtrl', ['$scope', '$interval', '$timeout', '$location', 'authService', 'driverSignalService', 'NgMap', 'accountService',function ($scope, $interval, $timeout, $location, authService, driverSignalService, NgMap, accountService) {
     var vm = this;
 
     driverSignalService.initialize(); //inits the signalservice factory
+    // accountService.deposit(30); // Allow the rider to have $30 dollars to spend
     vm.startAddress = [0, 0]; //this is used to store the location of the rider's pickup point
     vm.endAddress = [0, 0]; // this is the location of the rider's destination
     vm.inputAddress = null; //user types in the textbox and queries where to go, then hits enter or presses search
@@ -20,6 +21,15 @@ app.controller('driverCtrl', ['$scope', '$interval', '$timeout', '$location', 'a
         console.log('location', vm.place.geometry.location);
         vm.map.setCenter(vm.place.geometry.location);
     }
+
+    accountService.init = function() {
+        if(account.balance > 0)
+        {
+            this.deposit(30)
+        }
+    }
+    accountService.init()
+
 
     vm.init = function () {
         navigator.geolocation.getCurrentPosition(function (position) {
