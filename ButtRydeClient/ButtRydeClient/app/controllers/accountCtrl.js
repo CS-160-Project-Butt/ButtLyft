@@ -1,6 +1,29 @@
 ﻿'use strict';
 app.controller('accountCtrl', ['$location', 'authService', 'accountService', function ($location, authService, accountService) {
     var vm = this;
+
+    vm.typedThing = 0;
+    vm.accountBalance
+    vm.deposit = function (number) {
+
+
+        accountService.deposit(number)
+    }
+
+    vm.withdraw = function (number) {
+        accountService.withdraw(number)
+
+    }
+    vm.init = function() {
+        vm.accountBalance = accountService.getBalance()
+
+    }
+
+
+
+
+
+
     function containsAny(source, target) {
         for (var i = 0; i < target.length; i++) {
             for (var j = 0; j < source.length; j++) {

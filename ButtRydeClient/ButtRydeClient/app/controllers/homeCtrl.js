@@ -25,13 +25,6 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
         vm.showAllDrivers = true;
         
 
-        accountService.init = function () {
-            if (account.balance > 0) {
-                this.deposit(30)
-            }
-        }
-        accountService.init()
-
 
         vm.init = function () {
             navigator.geolocation.getCurrentPosition(function (position) {
@@ -48,7 +41,11 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
 
                     vm.onCenterChanged();//initialize the position of the center marker
                     vm.onDragEnd();
-
+                    if (accountService.getBalance() == 0) {
+                        accountService.deposit(30)
+                        console.log(accountService.getBalance())
+                        
+                    }
                 });
             }, function (err) { });
         }
@@ -169,6 +166,7 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
                     vm.setCenterMarker();
                 }
                 if (signalService.getDriverInfo().dropOffSignal == true && vm.stopAll == true) {
+                    accountService.withdraw(vm.fare) 
                     vm.goToEnd();
                 }
 

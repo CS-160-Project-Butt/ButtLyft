@@ -9,12 +9,13 @@ app.service('accountService', ['$http', '$q', function ($http, $q) {
 
 
     this.getBalance = function () {
-        console.log(account.balance)
+        console.log(account)
         return account.balance;
     };
 
     this.deposit = function (amount) {
-        account.balance += amount
+        console.log(amount)
+        account.balance = account.balance + 0 + amount
     }
 
     this.setBalance = function (amount) {
@@ -22,6 +23,7 @@ app.service('accountService', ['$http', '$q', function ($http, $q) {
     }
 
     this.withdraw = function (amount) {
+        console.log(amount)
         if (account.balance >= amount) {
             account.balance -= amount
             return true;

@@ -22,13 +22,6 @@ app.controller('driverCtrl', ['$scope', '$interval', '$timeout', '$location', 'a
         vm.map.setCenter(vm.place.geometry.location);
     }
 
-    accountService.init = function() {
-        if(account.balance > 0)
-        {
-            this.deposit(30)
-        }
-    }
-    accountService.init()
 
 
     vm.init = function () {

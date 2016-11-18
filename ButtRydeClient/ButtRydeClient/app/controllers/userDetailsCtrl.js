@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('userListCtrl', ['$location' ,'authService', function ($location, authService) {
+app.controller('userDetailsCtrl', ['$location' ,'authService','accountService', function ($location, authService, accountService) {
     var vm = this;
     function containsAny(source, target) {
         for (var i = 0; i < target.length; i++) {
@@ -11,8 +11,12 @@ app.controller('userListCtrl', ['$location' ,'authService', function ($location,
         return false;
     };
 
+    vm.init = function () {
+        vm.accountBalance = accountService.getBalance();
 
 
+    }
+    vm.init();
     vm.toLogin = function () {
         if (!authService.authentication.isAuth)
         {
