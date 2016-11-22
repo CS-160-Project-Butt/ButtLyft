@@ -34,7 +34,11 @@ app.controller('accountCtrl', ['$location', 'authService', 'accountService', fun
     vm.updateBalance = function () {
         vm.accountBalance = accountService.getBalance()
 
-
+        setTimeout(function () {
+            $("div.alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 3000);
     }
     vm.updateBalance();
 
