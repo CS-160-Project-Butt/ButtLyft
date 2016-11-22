@@ -41,13 +41,16 @@
         border: #7F7F7F solid 1px;
         text-align: center;
     }
+
+    .space {
+        width: auto;
+        height: 40px;
+        display: inline-block;
+    }
 </style>
 
 <div class="row">
     <div class="col-md-3">
-
-        Welcome, {{vm.loginData.username}}
-        <br />
 
         Route length: {{vm.map.directionsRenderers[0].directions.routes[0].legs[0].distance.text}}
         <br />
@@ -68,9 +71,17 @@
                placeholder="Type a Location">
 
         <!--json:{{vm.map.directionsRenderers[0].directions.routes[0].legs[0]}}
-    <br />-->
-
+        <br />-->
+        <a href="#" class="btn btn-success" ng-click="vm.setStartAddress();">Set Pickup Location</a>
+        <div class="space" />
+        <a href="#" class="btn btn-success" ng-click="vm.setEndAddress();">Set Dropoff Location</a>
+        <div class="space" />
+        <a href="#" class="btn btn-success" ng-disabled="!vm.showConfirmButton" ng-click="vm.confirmFare();">Request Driver</a>
+        <div class="space" />
+        <br />
+        <br />
     </div>
+
     <div class="col-md-9">
         <ng-map id="rider"
                 center="current-position"
@@ -95,39 +106,24 @@
                         origin={{vm.driverLocation}}
                         destination={{vm.startAddress}}>
             </directions>
-            <marker ng-if="!vm.hidePanel"
+            <marker ng-if="!vm.hidePanel&&!vm.showConfirmButton"
                     position="{{vm.centerMarker}}"
                     animation="Animation.BOUNCE"
                     centered="true"></marker>
-            <marker position="{{vm.startAddress}}"></marker>
-            <marker position="{{vm.endAddress}}"></marker>
-            <marker ng-repeat="m in vm.drivers" 
+            <marker ng-if="!vm.hidePanel&&!vm.showConfirmButton"
+                    position="{{vm.startAddress}}"></marker>
+            <marker ng-if="!vm.hidePanel&&!vm.showConfirmButton"
+                    position="{{vm.endAddress}}"></marker>
+            <marker ng-repeat="m in vm.drivers"
                     position="{{m.location}}"></marker>
-            <div ng-if="!vm.hidePanel&&(vm.showConfirmButton||!vm.dragging)">
-                <custom-marker position="{{vm.centerMarker}}">
-                    <div ng-if="!vm.pickupSelected">
-                        <button ng-hide="vm.showConfirmButton"
-                                class="btn btn-sm"
-                                ng-click="vm.setStartAddress();">
-                            Set Pickup Location
-                        </button>
-                    </div>
-                    <div ng-if="vm.pickupSelected">
-                        <button ng-hide="vm.showConfirmButton"
-                                class="btn btn-sm"
-                                ng-click="vm.setEndAddress();vm.calculateFare()">
-                            Set Dropoff Location
-                        </button>
-                    </div>
-                    <button ng-show="vm.showConfirmButton" 
-                            class="btn btn-warning"
-                            ng-click="vm.confirmFare();">
-                        Request Driver
-                    </button>
-                </custom-marker>
-            </div>
 
         </ng-map>
     </div>
 
+    <div class="col-md-9">
+        <br />
+        <div class="alert alert-info" ng-if="!vm.showConfirmButton&&vm.hidePanel">
+            <strong>You have requested a driver!</strong><br />A driver will be arriving at your pickup destination soon.
+        </div>
+    </div>
 </div>
