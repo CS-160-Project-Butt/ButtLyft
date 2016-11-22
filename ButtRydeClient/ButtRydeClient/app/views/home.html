@@ -58,7 +58,7 @@
         <br />
         Route time: {{vm.map.directionsRenderers[0].directions.routes[0].legs[0].duration.text}}
         <br />
-        Fare: ${{vm.fare}}
+        Fare: ${{vm.fare|number: 2}}
         <br />
         Starting Address: {{vm.map.directionsRenderers[0].directions.routes[0].legs[0].start_address}}
         <br />

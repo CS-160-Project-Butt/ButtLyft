@@ -14,6 +14,8 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
         vm.drivers = {};
         vm.fare = 0;
 
+        vm.pickupSelected = false;
+
         vm.showConfirmButton = false;
         vm.hidePanel = false;
 
@@ -21,7 +23,7 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
         vm.drivers = signalService.getDrivers();
         vm.driverInfo = signalService.getDriverInfo();
         vm.showAllDrivers = true;
-
+        
 
 
         vm.init = function () {
@@ -42,18 +44,13 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
                     if (accountService.getBalance() == 0) {
                         accountService.deposit(30)
                         console.log(accountService.getBalance())
-
+                        
                     }
                 });
             }, function (err) { });
         }
         vm.init();
 
-        vm.placeChanged = function () {
-            vm.place = this.getPlace();
-            console.log('location', vm.place.geometry.location);
-            vm.map.setCenter(vm.place.geometry.location);
-        }
         vm.calculateFare = function () {
             var distanceValue = vm.map.directionsRenderers[0].directions.routes[0].legs[0].distance.value;
             var durationValue = vm.map.directionsRenderers[0].directions.routes[0].legs[0].duration.value;
@@ -124,6 +121,7 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
         vm.setStartAddress = function () {
             console.log(vm.centerMarker)
             vm.startAddress = angular.copy(vm.centerMarker);
+            vm.pickupSelected = true;
 
             if (vm.endAddress != [0, 0]) {
                 $timeout(function () {
@@ -136,7 +134,7 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
             if (vm.startAddress != [0, 0]) {
                 $timeout(function () {
                     vm.calculateFare();
-
+                    
                 }, 1000);
             }
         }
@@ -146,12 +144,6 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
             vm.hidePanel = true;
             signalService.setDestinationCoords(vm.endAddress);
             signalService.boardCastConfirmSignal(vm.startAddress);
-
-            setTimeout(function () {
-                $("div.alert").fadeTo(500, 0).slideUp(500, function () {
-                    $(this).remove();
-                });
-            }, 3000);
         }
 
         vm.triggerCounter = function () {
@@ -174,7 +166,7 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
                     vm.setCenterMarker();
                 }
                 if (signalService.getDriverInfo().dropOffSignal == true && vm.stopAll == true) {
-                    accountService.withdraw(vm.fare)
+                    accountService.withdraw(vm.fare) 
                     vm.goToEnd();
                 }
 
