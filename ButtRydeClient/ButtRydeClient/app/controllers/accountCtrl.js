@@ -2,22 +2,45 @@
 app.controller('accountCtrl', ['$location', 'authService', 'accountService', function ($location, authService, accountService) {
     var vm = this;
 
+
     vm.typedThing = 0;
     vm.accountBalance
+    vm.message = "";
+
+
     vm.deposit = function (number) {
 
 
+
+
         accountService.deposit(number)
+        vm.message = "You have deposited " + number + "!"
+        vm.updateBalance()
     }
+
 
     vm.withdraw = function (number) {
-        accountService.withdraw(number)
+        if (accountService.withdraw(number) == true) {
+            vm.message = "You have withdrawn " + number + "!"
+            vm.updateBalance();
+        }
 
+
+        else
+            vm.message = "Your withdrawal was denied!"
     }
-    vm.init = function() {
+
+
+    vm.updateBalance = function () {
         vm.accountBalance = accountService.getBalance()
 
+
     }
+    vm.updateBalance();
+
+
+
+
 
 
 
@@ -36,6 +59,9 @@ app.controller('accountCtrl', ['$location', 'authService', 'accountService', fun
 
 
 
+
+
+
     vm.toLogin = function () {
         if (!authService.authentication.isAuth) {
             $location.path('/login');
@@ -43,9 +69,15 @@ app.controller('accountCtrl', ['$location', 'authService', 'accountService', fun
     }
     vm.toLogin();
 
+
     vm.roles = [];
 
+
     vm.authentication = authService.authentication;
+
+
+
+
 
 
 
@@ -54,12 +86,16 @@ app.controller('accountCtrl', ['$location', 'authService', 'accountService', fun
         vm.roles = resRoles.data;
     });
 
+
     vm.allUsersList;
     authService.getAllUsers().then(function (users) {
         console.log(users);
         vm.allUsersList = users.data;
 
+
     });
+
+
 
 
     vm.isUserInRoles = function (roles) {
@@ -73,6 +109,7 @@ app.controller('accountCtrl', ['$location', 'authService', 'accountService', fun
         return result;
     };
 
+
     vm.showAddition = {};
     vm.add = function (idx) {
         accountService.deposit(50)
@@ -80,4 +117,7 @@ app.controller('accountCtrl', ['$location', 'authService', 'accountService', fun
         vm.showAddition[idx] = true
     };
 
+
 }]);
+
+

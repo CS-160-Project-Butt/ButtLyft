@@ -23,12 +23,12 @@
         <h1>Your Account</h1>
 
 
-               Balance: {{vm.accountBalance}}
+               Your balance is {{vm.accountBalance}}
         <input type="number" class="form-control" ng-model="vm.typedThing"/>
         <button type="button" class="btn btn-sm" ng-click="vm.deposit(vm.typedThing)">Deposit</button>
         <button type="button" class="btn btn-sm" ng-click="vm.withdraw(vm.typedThing)">Withdraw</button>
         <div class="row">
-               Add Funds Now!
+               {{vm.message}}
         </div>
 
 
