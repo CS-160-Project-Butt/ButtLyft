@@ -51,6 +51,12 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
         }
         vm.init();
 
+        vm.placeChanged = function () {
+            vm.place = this.getPlace();
+            console.log('location', vm.place.geometry.location);
+            vm.map.setCenter(vm.place.geometry.location);
+        }
+
         vm.calculateFare = function () {
             var distanceValue = vm.map.directionsRenderers[0].directions.routes[0].legs[0].distance.value;
             var durationValue = vm.map.directionsRenderers[0].directions.routes[0].legs[0].duration.value;
