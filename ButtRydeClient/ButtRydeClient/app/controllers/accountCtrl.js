@@ -12,16 +12,19 @@ app.controller('accountCtrl', ['$location', 'authService', 'accountService', fun
 
 
 
-
-        accountService.deposit(number)
-        vm.message = "You have deposited " + number + "!"
-        vm.updateBalance()
+        if (accountService.deposit(number) == true)
+        {
+            vm.message = "You have deposited $" + number + "!"
+            vm.updateBalance()
+        }
+        else
+            vm.message = "Your deposit was denied!"
     }
 
 
     vm.withdraw = function (number) {
         if (accountService.withdraw(number) == true) {
-            vm.message = "You have withdrawn " + number + "!"
+            vm.message = "You have withdrawn $" + number + "!"
             vm.updateBalance();
         }
 
@@ -113,13 +116,6 @@ app.controller('accountCtrl', ['$location', 'authService', 'accountService', fun
         return result;
     };
 
-
-    vm.showAddition = {};
-    vm.add = function (idx) {
-        accountService.deposit(50)
-        accountService.getBalance
-        vm.showAddition[idx] = true
-    };
 
 
 }]);
