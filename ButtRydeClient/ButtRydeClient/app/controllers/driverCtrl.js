@@ -18,7 +18,7 @@ app.controller('driverCtrl', ['$scope', '$interval', '$timeout', '$location', 'a
 
     vm.placeChanged = function () {
         vm.place = this.getPlace();
-        console.log('location', vm.place.geometry.location);
+//        console.log('location', vm.place.geometry.location);
         vm.map.setCenter(vm.place.geometry.location);
     }
 
@@ -104,7 +104,7 @@ app.controller('driverCtrl', ['$scope', '$interval', '$timeout', '$location', 'a
         vm.displayRiderInfo = true;
         vm.rider.name = name;
         vm.rider.location = location;
-        console.log(vm.rider);
+ //       console.log(vm.rider);
         if (data != 'data') {
             $scope.$apply();
         }
@@ -117,7 +117,7 @@ app.controller('driverCtrl', ['$scope', '$interval', '$timeout', '$location', 'a
         driverSignalService.queryRider(rider, vm.centerMarker);
         vm.origin = angular.copy(vm.centerMarker);
         
-        console.log(vm.origin)
+//        console.log(vm.origin)
 
         var temp = angular.copy(vm.centerMarker);
         $timeout(function () {
@@ -208,7 +208,7 @@ app.controller('driverCtrl', ['$scope', '$interval', '$timeout', '$location', 'a
 
     vm.allUsersList;
     authService.getAllUsers().then(function (users) {
-        console.log(users);
+ //       console.log(users);
         vm.allUsersList = users.data;
 
     });

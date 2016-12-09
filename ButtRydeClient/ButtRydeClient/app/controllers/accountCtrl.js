@@ -96,7 +96,7 @@ app.controller('accountCtrl', ['$location', 'authService', 'accountService', fun
 
     vm.allUsersList;
     authService.getAllUsers().then(function (users) {
-        console.log(users);
+//        console.log(users);
         vm.allUsersList = users.data;
 
 

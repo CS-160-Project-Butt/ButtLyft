@@ -23,7 +23,7 @@ function ($scope,$route, $location, authService) {
 
         authService.getUserRoles().then(function (resRoles) {
             $scope.roles = resRoles.data;
-            console.log($scope.roles);
+//            console.log($scope.roles);
         });
 
         $scope.isUserInRoles = function (roles) {

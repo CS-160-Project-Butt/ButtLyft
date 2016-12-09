@@ -34,7 +34,7 @@ app.controller('userListCtrl', ['$location' ,'authService', function ($location,
 
     vm.allUsersList;
     authService.getAllUsers().then(function (users) {
-        console.log(users);
+ //       console.log(users);
         vm.allUsersList = users.data;
 
     });

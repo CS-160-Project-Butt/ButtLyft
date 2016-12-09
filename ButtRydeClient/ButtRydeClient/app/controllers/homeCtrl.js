@@ -43,7 +43,7 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
                     vm.onDragEnd();
                     if (accountService.getBalance() == 0) {
                         accountService.deposit(30)
-                        console.log(accountService.getBalance())
+  //                      console.log(accountService.getBalance())
                         
                     }
                 });
@@ -53,7 +53,7 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
 
         vm.placeChanged = function () {
             vm.place = this.getPlace();
-            console.log('location', vm.place.geometry.location);
+//            console.log('location', vm.place.geometry.location);
             vm.map.setCenter(vm.place.geometry.location);
         }
 
@@ -61,7 +61,7 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
             var distanceValue = vm.map.directionsRenderers[0].directions.routes[0].legs[0].distance.value;
             var durationValue = vm.map.directionsRenderers[0].directions.routes[0].legs[0].duration.value;
             var fare = ((distanceValue / 1000.0) * .3) + ((durationValue / 60) * 1.5) //fare per km + fare per min driven
-            console.log(fare)
+//            console.log(fare)
             if (fare > 5)
             { vm.fare = fare }
             else vm.fare = 5;
@@ -125,7 +125,7 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
          * once we figure out where we want to get picked up from we click the button and the button calls this and does things
          */
         vm.setStartAddress = function () {
-            console.log(vm.centerMarker)
+//            console.log(vm.centerMarker)
             vm.startAddress = angular.copy(vm.centerMarker);
             vm.pickupSelected = true;
 
@@ -243,7 +243,7 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
 
         vm.allUsersList;
         authService.getAllUsers().then(function (users) {
-            console.log(users);
+ //           console.log(users);
             vm.allUsersList = users.data;
 
         });
