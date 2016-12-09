@@ -58,16 +58,18 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
         }
 
         vm.calculateFare = function () {
-            var distanceValue = vm.map.directionsRenderers[0].directions.routes[0].legs[0].distance.value;
-            var durationValue = vm.map.directionsRenderers[0].directions.routes[0].legs[0].duration.value;
-            var fare = ((distanceValue / 1000.0) * .3) + ((durationValue / 60) * 1.5) //fare per km + fare per min driven
-//            console.log(fare)
-            if (fare > 5)
-            { vm.fare = fare }
-            else vm.fare = 5;
+            if (vm.map.directionsRenderers[0].directions != undefined) {
+                var distanceValue = vm.map.directionsRenderers[0].directions.routes[0].legs[0].distance.value;
+                var durationValue = vm.map.directionsRenderers[0].directions.routes[0].legs[0].duration.value;
+                var fare = ((distanceValue / 1000.0) * .3) + ((durationValue / 60) * 1.5) //fare per km + fare per min driven
+                //            console.log(fare)
+                if (fare > 5)
+                { vm.fare = fare }
+                else vm.fare = 5;
 
-            vm.showConfirmButton = true;
-            vm.onCenterChanged();
+                vm.showConfirmButton = true;
+                vm.onCenterChanged();
+            }
         }
         ///**
         // * Used by the html map to alter/update the map location
@@ -146,10 +148,12 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
         }
 
         vm.confirmFare = function () {
-            vm.showConfirmButton = false;
-            vm.hidePanel = true;
-            signalService.setDestinationCoords(vm.endAddress);
-            signalService.boardCastConfirmSignal(vm.startAddress);
+            if (vm.map.directionsRenderers[0].directions != undefined) {
+                vm.showConfirmButton = false;
+                vm.hidePanel = true;
+                signalService.setDestinationCoords(vm.endAddress);
+                signalService.boardCastConfirmSignal(vm.startAddress);
+            }
         }
 
         vm.triggerCounter = function () {

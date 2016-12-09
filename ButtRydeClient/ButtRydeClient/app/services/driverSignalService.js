@@ -16,14 +16,14 @@ app.factory('driverSignalService', ['authService','$', function (authService, $)
             connection.start();
 
             hub.on('onHit', function (data) {
-                console.log(data);
+//                console.log(data);
             });
             hub.on('currentLocation', function (data) {
-                console.log(data);
+//                console.log(data);
             });
             hub.on('receiveBoardCastConfirmSignal', function (rider, geocoords) {
                 var found = false;
-                console.log(rider + " is at " + angular.fromJson(geocoords));
+//                console.log(rider + " is at " + angular.fromJson(geocoords));
                 angular.forEach(availableRiders, function (value, key) {
                     if (value.name == rider) {
                         value.name = rider;
@@ -39,7 +39,7 @@ app.factory('driverSignalService', ['authService','$', function (authService, $)
                     }
                     availableRiders.push(temp);
 
-                    console.log(availableRiders);
+ //                   console.log(availableRiders);
                 }
             });
             hub.on('collectRiderAgreementSignal', function (rider, driver) {
@@ -51,13 +51,13 @@ app.factory('driverSignalService', ['authService','$', function (authService, $)
                             riderInfo.location = value.location;
                         }
                     })
-                    console.log(riderInfo);
+ //                   console.log(riderInfo);
                 }
             });
             hub.on('getDestinationCoord', function (driver, coord) {
                 if (driverUser == driver) {
                     riderInfo.destination = angular.fromJson(coord);
-                    console.log(riderInfo);
+ //                   console.log(riderInfo);
                 }
             });
 
@@ -83,7 +83,7 @@ app.factory('driverSignalService', ['authService','$', function (authService, $)
         pickupRider: function (riderName) {
 
             hub.invoke('pickupRider', riderInfo.name);
-            console.log(riderInfo.name);
+//            console.log(riderInfo.name);
         },
         dropOffRider: function (riderName) {
 

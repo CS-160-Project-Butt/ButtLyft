@@ -16,18 +16,18 @@ app.factory('signalService', ['authService', '$', function (authService, $) {
 
     var selfService = {
         initialize: function () {
-            console.log('hello')
+ //           console.log('hello')
             riderUser = authService.authentication.userName;
             connection = $.hubConnection('http://localhost:1272/');
             hub = connection.createHubProxy('dataHub');
             connection.start();
 
             hub.on('onHit', function (data) {
-                console.log(data);
+//                console.log(data);
             });
 
             hub.on('currentMessage', function (data) {
-                console.log(data);
+//                console.log(data);
             });
 
             hub.on('receiveLocation', function (driver, geocoords) {
@@ -65,14 +65,14 @@ app.factory('signalService', ['authService', '$', function (authService, $) {
                     foreignDriverUser = driver;
                     driverInfo.name = driver;
                     driverInfo.location = angular.fromJson(coords);
-                    console.log(driverInfo);
+//                    console.log(driverInfo);
                     selfService.riderAgreementSignal();
                 }
             });
             hub.on('getPickupSignal', function (me) {
 
-                console.log(riderUser);
-                console.log(me);
+//                console.log(riderUser);
+//                console.log(me);
                 if (riderUser == me) {
                     pickupSignal = true;
                     driverInfo.pickupSignal = true;
@@ -105,15 +105,15 @@ app.factory('signalService', ['authService', '$', function (authService, $) {
             return myCoords;
         },
         setDestinationCoords: function (data) {
-            console.log(data)
+//            console.log(data)
             destinationCoords = data;
         },
         boardCastConfirmSignal: function (geocoords) { //driver tells everyone that it is ok for pickup
-            console.log(geocoords)
+//            console.log(geocoords)
             hub.invoke('boardCastConfirmSignal', riderUser, angular.toJson(geocoords))
         },
         riderAgreementSignal: function () {
-            console.log(foreignDriverUser);
+//            console.log(foreignDriverUser);
             hub.invoke('riderAgreementSignal', riderUser, foreignDriverUser)
         },
         sendDestinationCoordinate: function () {

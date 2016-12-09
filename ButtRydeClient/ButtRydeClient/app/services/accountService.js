@@ -9,12 +9,12 @@ app.service('accountService', ['$http', '$q', function ($http, $q) {
 
 
     this.getBalance = function () {
-        console.log(account)
+//        console.log(account)
         return account.balance;
     };
 
     this.deposit = function (amount) {
-        console.log(amount)
+//        console.log(amount)
         if (amount >= 0 && typeof (amount) != 'undefined') {
             amount = amount.toFixed(2)
             amount = Number(amount)
@@ -30,7 +30,7 @@ app.service('accountService', ['$http', '$q', function ($http, $q) {
     }
 
     this.withdraw = function (amount) {
-        console.log(amount)
+//        console.log(amount)
         if (account.balance >= amount && amount >= 0 && typeof (amount) != 'undefined') {
             amount = amount.toFixed(2)
             amount = Number(amount)
