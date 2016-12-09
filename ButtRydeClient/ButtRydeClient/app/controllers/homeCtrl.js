@@ -110,15 +110,16 @@ app.controller('homeCtrl', ['$route', '$q', '$scope', '$interval', '$timeout', '
          * parameter: center, usually null, if not null then we will set the pos of marker to the argument(&center) instead
          */
         vm.onCenterChanged = function (center) {
+            if (vm.map != undefined) {
+                vm.dragging = true;
+                var temp = [0, 0];
+                temp[0] = vm.map.getCenter().lat();
+                temp[1] = vm.map.getCenter().lng();
+                if (center != null) temp = center
+                if (temp[0] != null && temp[1] != null) vm.centerMarker = temp;
 
-            vm.dragging = true;
-            var temp = [0, 0];
-            temp[0] = vm.map.getCenter().lat();
-            temp[1] = vm.map.getCenter().lng();
-            if (center != null) temp = center
-            if (temp[0] != null && temp[1] != null) vm.centerMarker = temp;
-
-            //vm.map.setCenter(vm.centerMarker)
+                //vm.map.setCenter(vm.centerMarker)
+            }
         }
 
 
